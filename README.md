@@ -23,7 +23,7 @@ The **Residential Apartment Rental Portal** streamlines the process of finding, 
 
 ## 🛠 Tech Stack
 
-- **Frontend**: Angular 17+, Tailwind CSS, RxJS.
+- **Frontend**: Angular v20, HTML5, Tailwind CSS, RxJS.
 - **Backend**: Python Flask, Flask-CORS, PyJWT, Psycopg2.
 - **Database**: PostgreSQL 15.
 - **DevOps**: Docker, Docker Compose, Google Cloud Run ready.
@@ -83,6 +83,24 @@ The **Residential Apartment Rental Portal** streamlines the process of finding, 
 - **Manage Units**: Add/Edit/Delete towers and units.
 - **Bookings**: Review and approve tenant booking requests.
 - **Maintenance**: Track and update status of repair requests.
+
+---
+
+---
+
+## 🔐 Demo Credentials
+
+Use the following credentials to test the system's functionality:
+
+### Admin Access
+- **Email**: `admin@gmail.com`
+- **Password**: `admin123`
+- *Role: Can manage towers, flats, and approve bookings.*
+
+### User Access
+- **Email**: `user@gmail.com`
+- **Password**: `123`
+- *Role: Can browse flats, request bookings, and write reviews.*
 
 ---
 
