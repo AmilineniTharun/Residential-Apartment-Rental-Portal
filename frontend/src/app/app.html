@@ -1,0 +1,90 @@
+<nav class="bg-indigo-600 text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center flex-1">
+        <a routerLink="/"
+          class="text-lg sm:text-xl font-bold tracking-tight hover:text-indigo-100 transition-colors whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] sm:max-w-none">
+          Residential Apartment Rental Portal
+        </a>
+        <div class="hidden md:block ml-10 flex items-baseline space-x-4">
+          <a routerLink="/flats" routerLinkActive="bg-indigo-700"
+            class="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500 transition-colors">Find Flats</a>
+
+          @if (authService.currentUser$ | async; as user) {
+          @if (user.role === 'admin') {
+          <a routerLink="/admin" routerLinkActive="bg-indigo-700"
+            class="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500 transition-colors">Admin Dashboard</a>
+          } @else {
+          <a routerLink="/dashboard" routerLinkActive="bg-indigo-700"
+            class="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500 transition-colors">My Dashboard</a>
+          }
+          }
+        </div>
+      </div>
+
+      <!-- Desktop Auth Links -->
+      <div class="hidden md:flex gap-4 items-center">
+        @if (authService.currentUser$ | async; as user) {
+        <span class="text-xs text-indigo-200 lg:text-sm">Hello, {{ user.email }}</span>
+        <button (click)="logout()" class="text-sm font-medium hover:text-indigo-200 transition-colors px-3 py-2">
+          Logout
+        </button>
+        } @else {
+        <a routerLink="/login"
+          class="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500 transition-colors">Login</a>
+        <a routerLink="/register"
+          class="bg-white text-indigo-600 px-4 py-2 rounded-md text-sm font-bold shadow hover:bg-gray-100 transition-colors">Register</a>
+        }
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="flex md:hidden">
+        <button (click)="toggleMobileMenu()"
+          class="inline-flex items-center justify-center p-2 rounded-md text-indigo-200 hover:text-white hover:bg-indigo-500 focus:outline-none transition-colors">
+          <svg class="h-6 w-6" [class.hidden]="isMobileMenuOpen" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg class="h-6 w-6" [class.show]="isMobileMenuOpen" [class.hidden]="!isMobileMenuOpen" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden" [class.block]="isMobileMenuOpen" [class.hidden]="!isMobileMenuOpen">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-indigo-700 shadow-inner">
+      <a routerLink="/flats" (click)="isMobileMenuOpen = false"
+        class="block px-3 py-2 rounded-md text-base font-medium hover:bg-indigo-600 transition-colors">Find Flats</a>
+
+      @if (authService.currentUser$ | async; as user) {
+      @if (user.role === 'admin') {
+      <a routerLink="/admin" (click)="isMobileMenuOpen = false"
+        class="block px-3 py-2 rounded-md text-base font-medium hover:bg-indigo-600 transition-colors">Admin
+        Dashboard</a>
+      } @else {
+      <a routerLink="/dashboard" (click)="isMobileMenuOpen = false"
+        class="block px-3 py-2 rounded-md text-base font-medium hover:bg-indigo-600 transition-colors">My Dashboard</a>
+      }
+      <hr class="border-indigo-500 my-2">
+      <div class="px-3 py-2 text-xs text-indigo-200">Logged in as: {{ user.email }}</div>
+      <button (click)="logout(); isMobileMenuOpen = false"
+        class="w-full text-left block px-3 py-2 rounded-md text-base font-medium hover:bg-indigo-600 transition-colors">
+        Logout
+      </button>
+      } @else {
+      <hr class="border-indigo-500 my-2">
+      <a routerLink="/login" (click)="isMobileMenuOpen = false"
+        class="block px-3 py-2 rounded-md text-base font-medium hover:bg-indigo-600 transition-colors">Login</a>
+      <a routerLink="/register" (click)="isMobileMenuOpen = false"
+        class="block px-3 py-2 rounded-md text-base font-medium bg-white text-indigo-600 mt-2">Register</a>
+      }
+    </div>
+  </div>
+</nav>
+
+<main class="min-h-screen bg-gray-50">
+  <router-outlet></router-outlet>
+</main>

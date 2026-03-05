@@ -1,0 +1,35 @@
+
+--- Login Attempt: 2026-03-05 18:18:11.699877 ---
+Email input: 'admin@rentalportal.com'
+User found: ID=1, Role=admin
+Stored hash: '$2b$12$7eabZ4m72QhsCbuf.kLPbO7S8SWsvNBNvpgSXKY2cRY/jkKws/MQO'
+Password match (bcrypt.checkpw): True
+Result: Success!
+
+--- Login Attempt: 2026-03-05 18:18:14.090364 ---
+Email input: 'user@rentalportal.com'
+User found: ID=2, Role=user
+Stored hash: '$2b$12$saCbIiScPQ0xzmLmu/3QUO6aKy1jPQbH3IIIFWNuxQf.15R68niJu'
+Password match (bcrypt.checkpw): True
+Result: Success!
+
+--- Login Attempt: 2026-03-05 18:18:16.505203 ---
+Email input: 'john@gmail.com'
+User found: ID=3, Role=user
+Stored hash: '$2b$12$YiVAvGoJAGYM34PIldBKzeTcNn3vrbrs/newULBhZ.sFJCnqsk4za'
+Password match (bcrypt.checkpw): False
+Result: Password mismatch.
+
+--- Login Attempt: 2026-03-05 18:18:18.947106 ---
+Email input: 'john@gmail.com'
+User found: ID=3, Role=user
+Stored hash: '$2b$12$YiVAvGoJAGYM34PIldBKzeTcNn3vrbrs/newULBhZ.sFJCnqsk4za'
+Password match (bcrypt.checkpw): False
+Result: Password mismatch.
+
+--- Login Attempt: 2026-03-05 18:19:30.725539 ---
+Email input: 'test_1772714966@example.com'
+User found: ID=31, Role=user
+Stored hash: '$2b$12$MMhdr.pSGX1NdLZwXTtdB.EqQiBQSfRX1F9Fx2rbf55HQT7Ncbkw6'
+Password match (bcrypt.checkpw): True
+Result: Success!

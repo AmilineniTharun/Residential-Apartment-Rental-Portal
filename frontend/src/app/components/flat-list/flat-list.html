@@ -1,0 +1,881 @@
+<div class="min-h-screen bg-gray-50 pt-8 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Header -->
+        <div class="md:flex md:items-center md:justify-between mb-8">
+            <div class="flex-1 min-w-0">
+                <h2
+                    class="text-3xl font-extrabold text-gray-900 sm:text-4xl sm:tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+                    Find Your Dream Flat
+                </h2>
+                <p class="mt-2 text-lg text-gray-500">
+                    Browse through our premium selection of apartments and book a visit today.
+                </p>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8">
+
+            <!-- Filters Sidebar -->
+            <div class="w-full md:w-64 flex-shrink-0">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 sticky top-24">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4">
+                            </path>
+                        </svg>
+                        Filters
+                    </h3>
+
+                    <form (submit)="applyFilters()" class="space-y-6">
+                        <!-- Location Search -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Location Search</label>
+                            <div class="relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.242-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <input type="text" [(ngModel)]="filters.location" name="location"
+                                    class="block w-full pl-9 pr-4 py-2.5 rounded-xl border-gray-200 bg-gray-50 text-sm focus:border-indigo-500 focus:ring-indigo-500 transition-colors"
+                                    placeholder="City, Area, or Street">
+                            </div>
+                        </div>
+
+                        <!-- Tower Filter -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tower</label>
+                            <div class="flex flex-col gap-2">
+                                <select [(ngModel)]="filters.tower_id" name="tower_id" (change)="onTowerChange()"
+                                    class="block w-full rounded-xl border-gray-200 bg-gray-50 py-2.5 px-4 text-sm focus:border-indigo-500 focus:ring-indigo-500 transition-colors">
+                                    <option value="">Any Tower</option>
+                                    @for (tower of towers; track tower.id) {
+                                    <option [value]="tower.id">{{ tower.name }}</option>
+                                    }
+                                </select>
+
+                                <button *ngIf="selectedTower?.image_url" type="button" (click)="viewTowerPhoto()"
+                                    class="text-left text-xs font-semibold text-indigo-600 hover:text-indigo-800 transition-colors flex items-center mt-1">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    View Tower Photo
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- BHK & Wing Row -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">BHK Type</label>
+                                <select [(ngModel)]="filters.bhk" name="bhk"
+                                    class="block w-full rounded-xl border-gray-200 bg-gray-50 py-2.5 px-4 text-sm focus:border-indigo-500 focus:ring-indigo-500 transition-colors">
+                                    <option value="">Any BHK</option>
+                                    <option value="1">1 BHK</option>
+                                    <option value="2">2 BHK</option>
+                                    <option value="3">3 BHK</option>
+                                    <option value="4">4+ BHK</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Wing</label>
+                                <select [(ngModel)]="filters.wing" name="wing"
+                                    class="block w-full rounded-xl border-gray-200 bg-gray-50 py-2.5 px-4 text-sm focus:border-indigo-500 focus:ring-indigo-500 transition-colors">
+                                    <option value="">Any Wing</option>
+                                    <option value="North">North</option>
+                                    <option value="South">South</option>
+                                    <option value="East">East</option>
+                                    <option value="West">West</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Floor Filter -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Floor Number</label>
+                            <input type="number" [(ngModel)]="filters.floor" name="floor" min="0"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 py-2.5 px-4 text-sm focus:border-indigo-500 focus:ring-indigo-500 transition-colors"
+                                placeholder="Enter Floor">
+                        </div>
+
+                        <!-- Status Filter -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Unit Status</label>
+                            <select [(ngModel)]="filters.status" name="status"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 py-2.5 px-4 text-sm focus:border-indigo-500 focus:ring-indigo-500 transition-colors">
+                                <option value="all">Any Status</option>
+                                <option value="available">Available</option>
+                                <option value="under_maintenance">Under Maintenance</option>
+                            </select>
+                        </div>
+
+                        <!-- Price Range -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Price Range</label>
+                            <div class="space-y-3">
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">₹</span>
+                                    </div>
+                                    <input type="number" [(ngModel)]="filters.min_price" name="min_price"
+                                        class="block w-full pl-7 pr-4 py-2.5 rounded-xl border-gray-200 bg-gray-50 text-sm focus:border-indigo-500 focus:ring-indigo-500 transition-colors"
+                                        placeholder="Min Price">
+                                </div>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">₹</span>
+                                    </div>
+                                    <input type="number" [(ngModel)]="filters.max_price" name="max_price"
+                                        class="block w-full pl-7 pr-4 py-2.5 rounded-xl border-gray-200 bg-gray-50 text-sm focus:border-indigo-500 focus:ring-indigo-500 transition-colors"
+                                        placeholder="Max Price">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-100 flex gap-3">
+                            <button type="button" (click)="clearFilters()"
+                                class="flex-1 bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors">
+                                Clear
+                            </button>
+                            <button type="submit"
+                                class="flex-1 bg-indigo-600 border border-transparent text-white py-2 px-4 rounded-xl text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm hover:shadow-md">
+                                Search
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Flats Grid Area -->
+            <div class="flex-1">
+
+                <!-- Error State -->
+                @if (errorMessage) {
+                <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded-md mb-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-red-700">{{ errorMessage }}</p>
+                        </div>
+                    </div>
+                </div>
+                }
+
+                <!-- Success State -->
+                @if (successMessage) {
+                <div
+                    class="bg-green-50 border-l-4 border-green-500 p-4 rounded-xl mb-6 animate-in fade-in slide-in-from-top-2 duration-300 shadow-sm">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-green-800">{{ successMessage }}</p>
+                        </div>
+                    </div>
+                </div>
+                }
+
+                <!-- Loading State -->
+                @if (isLoading) {
+                <div class="flex flex-col justify-center items-center h-64 space-y-4">
+                    <svg class="animate-spin h-10 w-10 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                        </circle>
+                        <path class="opacity-75" fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                        </path>
+                    </svg>
+                    <p class="text-gray-500 font-medium animate-pulse">Loading amazing flats for you...</p>
+                </div>
+                } @else {
+
+                <!-- Empty State -->
+                @if (flats.length === 0 && !errorMessage) {
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center">
+                    <svg class="mx-auto h-16 w-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">No flats found</h3>
+                    <p class="mt-2 text-gray-500">Try adjusting your filters to see more results.</p>
+                    <div class="mt-6">
+                        <button (click)="clearFilters()" type="button"
+                            class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-xl text-indigo-700 bg-indigo-100 hover:bg-indigo-200 transition-colors">
+                            Clear all filters
+                        </button>
+                    </div>
+                </div>
+                } @else if (flats.length > 0) {
+
+                <!-- Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                    @for (flat of flats; track flat.id) {
+                    <div
+                        class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col group">
+                        <div class="relative h-48 bg-gray-200 overflow-hidden">
+                            @if (flat.image_url) {
+                            <img [src]="flat.image_url" [alt]="'Unit ' + flat.unit_number"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            } @else {
+                            <div
+                                class="flex items-center justify-center w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 text-gray-400">
+                                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                    </path>
+                                </svg>
+                            </div>
+                            }
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <span
+                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-white text-gray-800 shadow-sm border border-transparent">
+                                    @if(flat.status === 'available' && flat.available_from) {
+                                    Available from {{ flat.available_from | date:'mediumDate' }}
+                                    } @else {
+                                    {{ flat.status | titlecase }}
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h3
+                                        class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
+                                        Unit {{ flat.unit_number }}</h3>
+                                    @if (flat.floor) {
+                                    <p class="text-[11px] font-bold text-indigo-500 uppercase tracking-widest mt-0.5">
+                                        Floor {{ flat.floor }}</p>
+                                    }
+                                </div>
+                                <p class="text-xl font-extrabold text-indigo-600 text-right">₹{{ flat.price }}<span
+                                        class="text-sm text-gray-500 font-normal">/mo</span></p>
+                            </div>
+                            <div class="flex items-center text-gray-500 text-sm mb-4 space-x-4">
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1.5 text-gray-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                        </path>
+                                    </svg>
+                                    <span>{{ flat.tower_name }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1.5 text-gray-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 12l2-2m0 0l7-7 7 7m-9-8v8m-4 4h14"></path>
+                                    </svg>
+                                    <span>{{ flat.bhk }} BHK</span>
+                                </div>
+                            </div>
+                            @if (flat.security_deposit) {
+                            <div
+                                class="text-xs text-amber-700 bg-amber-50 rounded-lg px-2 py-1 inline-flex items-center gap-1 font-medium mb-3">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                                Security Deposit: ₹{{ flat.security_deposit }}
+                            </div>
+                            }
+
+                            <div class="mt-auto pt-4 border-t border-gray-100">
+                                <div class="flex justify-between items-center w-full">
+                                    <!-- Details Button -->
+                                    <button (click)="viewDetails(flat)"
+                                        class="text-indigo-600 font-medium text-sm hover:text-indigo-800 transition-colors flex items-center">
+                                        View Details
+                                    </button>
+
+                                    <!-- Book Button based on auth -->
+                                    @if (authService.currentUser$ | async; as user) {
+                                    @if (user.role === 'user') {
+                                    <button (click)="requestQuickBooking(flat)"
+                                        class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-sm hover:bg-indigo-700 hover:shadow transition-all">
+                                        Request Booking
+                                    </button>
+                                    }
+                                    } @else {
+                                    <a routerLink="/login"
+                                        class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors">
+                                        Login to Book
+                                    </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+
+                <!-- Pagination -->
+                @if (totalPages > 1) {
+                <div class="mt-10 flex items-center justify-center">
+                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                        <button [disabled]="currentPage === 1" (click)="loadFlats(currentPage - 1)"
+                            class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span class="sr-only">Previous</span>
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+
+                        @for (page of getPageArray(); track page) {
+                        <button (click)="loadFlats(page)" [class.z-10]="currentPage === page"
+                            [class.bg-indigo-50]="currentPage === page" [class.border-indigo-500]="currentPage === page"
+                            [class.text-indigo-600]="currentPage === page" [class.bg-white]="currentPage !== page"
+                            [class.border-gray-300]="currentPage !== page" [class.text-gray-500]="currentPage !== page"
+                            class="relative inline-flex items-center px-4 py-2 border text-sm font-medium hover:bg-gray-50 transition-colors">
+                            {{ page }}
+                        </button>
+                        }
+
+                        <button [disabled]="currentPage === totalPages" (click)="loadFlats(currentPage + 1)"
+                            class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span class="sr-only">Next</span>
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </nav>
+                </div>
+                }
+                }
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Flat Details Modal -->
+    @if (selectedFlat) {
+    <div
+        class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-gray-900/60 backdrop-blur-sm transition-all duration-300 animate-in fade-in">
+        <div (click)="$event.stopPropagation()"
+            class="bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[95vh] md:h-[85vh] overflow-hidden flex flex-col md:flex-row animate-in zoom-in duration-300">
+
+            <!-- Left: Large Image Section (Gallery) -->
+            <div class="md:w-3/5 relative h-64 md:h-full bg-gray-100 overflow-hidden group">
+                @if (selectedFlatImages.length > 0) {
+                <div class="w-full h-full relative bg-gray-900">
+                    <img [src]="selectedFlatImages[currentImageIndex]"
+                        [alt]="'Unit ' + selectedFlat.unit_number + ' Image ' + (currentImageIndex + 1)"
+                        class="w-full h-full object-contain transition-opacity duration-300" />
+
+                    <!-- Navigation Arrows (only show if > 1 image) -->
+                    @if (selectedFlatImages.length > 1) {
+                    <button (click)="prevImage($event)"
+                        class="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full bg-white/80 text-gray-800 shadow-md hover:bg-white hover:scale-110 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 z-10">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button (click)="nextImage($event)"
+                        class="absolute top-1/2 right-4 -translate-y-1/2 p-2 rounded-full bg-white/80 text-gray-800 shadow-md hover:bg-white hover:scale-110 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 z-10">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+
+                    <!-- Dots Indicator -->
+                    <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
+                        @for (img of selectedFlatImages; track $index) {
+                        <button (click)="setCurrentImage($index, $event)"
+                            [class.bg-white]="currentImageIndex === $index"
+                            [class.bg-white/50]="currentImageIndex !== $index"
+                            class="w-2 h-2 rounded-full transition-all hover:bg-white shadow-sm"></button>
+                        }
+                    </div>
+                    }
+                </div>
+                } @else {
+                <div
+                    class="flex items-center justify-center w-full h-full bg-gradient-to-br from-indigo-50 to-purple-50 text-indigo-400">
+                    <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                        </path>
+                    </svg>
+                </div>
+                }
+
+                <!-- Status Badge -->
+                <div class="absolute top-6 left-6 z-20">
+                    <span [class.bg-white/90]="selectedFlat.status !== 'under_maintenance'"
+                        [class.text-indigo-700]="selectedFlat.status !== 'under_maintenance'"
+                        [class.bg-amber-500]="selectedFlat.status === 'under_maintenance'"
+                        [class.text-white]="selectedFlat.status === 'under_maintenance'"
+                        class="px-4 py-1.5 rounded-full text-sm font-bold shadow-lg backdrop-blur-sm border border-indigo-100">
+                        @if(selectedFlat.status === 'available' && selectedFlat.available_from) {
+                        Available from {{ selectedFlat.available_from | date:'mediumDate' }}
+                        } @else {
+                        {{ selectedFlat.status?.replace('_', ' ') | titlecase }}
+                        }
+                    </span>
+                </div>
+            </div>
+
+            <!-- Right: Details Content Section -->
+            <div class="md:w-2/5 flex flex-col flex-1 min-h-0 bg-white relative">
+
+                <!-- Inner scrollable area -->
+                <div class="p-8 md:p-10 flex-1 min-h-0 overflow-y-auto w-full">
+
+                    <!-- Close Button -->
+                    <button (click)="closeDetails()"
+                        class="absolute top-6 right-6 p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors z-10">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <div class="mb-2">
+                        <div class="flex items-center gap-2 flex-wrap mb-1">
+                            <span class="text-indigo-600 font-bold text-sm tracking-wider uppercase">{{
+                                selectedFlat.tower_name
+                                }}</span>
+                            @if (selectedFlat.floor) {
+                            <span
+                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100">
+                                Floor {{ selectedFlat.floor }}
+                            </span>
+                            }
+                            @if (selectedFlat.wing) {
+                            <span
+                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-100">
+                                {{ selectedFlat.wing }} Wing
+                            </span>
+                            }
+                        </div>
+                        @if (selectedFlat.location) {
+                        <p class="text-xs text-gray-500 flex items-center gap-1 mb-1">
+                            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            {{ selectedFlat.location }}
+                        </p>
+                        }
+                        <h2 class="text-3xl font-extrabold text-gray-900 mt-1">Unit {{ selectedFlat.unit_number }}</h2>
+                    </div>
+
+                    <div class="flex items-baseline space-x-2 mb-8">
+                        <span class="text-4xl font-black text-indigo-600">₹{{ selectedFlat.price }}</span>
+                        <span class="text-gray-500 font-medium">per month</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6 mb-10">
+                        <div class="flex items-center space-x-3 p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                            <div class="p-2.5 rounded-xl bg-white shadow-sm text-indigo-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 12l2-2m0 0l7-7 7 7m-9-8v8m-4 4h14"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 font-bold uppercase tracking-tight">Bedrooms</p>
+                                <p class="text-lg font-bold text-gray-900 leading-tight">{{ selectedFlat.bhk }} BHK</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-3 p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                            <div class="p-2.5 rounded-xl bg-white shadow-sm text-indigo-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 font-bold uppercase tracking-tight">Location</p>
+                                <p class="text-lg font-bold text-gray-900 leading-tight">
+                                    {{ selectedFlat.location || selectedFlat.tower_name }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unit Description -->
+                    <div class="mb-10 p-6 bg-indigo-50/30 rounded-2xl border border-indigo-100/50">
+                        <h4 class="text-sm font-bold text-gray-900 uppercase tracking-widest mb-3">Unit Description</h4>
+                        <div class="prose prose-sm max-w-none text-gray-700 leading-relaxed"
+                            [innerHTML]="selectedFlat.description || 'No detailed description available for this unit.'">
+                        </div>
+                    </div>
+
+                    <!-- Amenities Section -->
+                    @if (selectedFlat.amenities && selectedFlat.amenities.length > 0) {
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Included Amenities</h3>
+                            <span
+                                class="text-[10px] text-indigo-500 font-medium bg-indigo-50 px-2 py-0.5 rounded-full">Click
+                                on icons for info</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            @for (amenity of selectedFlat.amenities; track amenity.name) {
+                            <button (click)="toggleAmenityDescription(amenity)"
+                                [class.bg-indigo-600]="selectedAmenity?.name === amenity.name"
+                                [class.text-white]="selectedAmenity?.name === amenity.name"
+                                [class.bg-indigo-50]="selectedAmenity?.name !== amenity.name"
+                                [class.text-indigo-600]="selectedAmenity?.name !== amenity.name"
+                                class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm border border-transparent"
+                                [class.border-indigo-200]="selectedAmenity?.name !== amenity.name">
+                                {{ amenity.name }}
+                            </button>
+                            }
+                        </div>
+
+                        <!-- Amenity Description Box -->
+                        <div *ngIf="selectedAmenity"
+                            class="mt-4 p-4 bg-gradient-to-br from-indigo-50 to-white border border-indigo-100 rounded-xl shadow-inner animate-in fade-in slide-in-from-top-2 duration-300">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-1.5 h-1.5 rounded-full bg-indigo-600"></div>
+                                <h4 class="text-sm font-bold text-indigo-900">{{ selectedAmenity.name }}</h4>
+                            </div>
+                            <p class="text-xs text-indigo-700 leading-relaxed italic">
+                                {{ selectedAmenity.description || 'No description available for this amenity.' }}
+                            </p>
+                        </div>
+                    </div>
+                    }
+
+                    <!-- Reviews Section -->
+                    <div class="mb-10 w-full pr-2">
+                        <h4
+                            class="text-sm font-bold text-gray-900 uppercase tracking-widest mb-4 flex items-center justify-between">
+                            Reviews ({{ reviews.length }})
+                        </h4>
+
+                        @if (reviews.length === 0) {
+                        <div class="text-center py-6 bg-gray-50 rounded-2xl border border-gray-100">
+                            <p class="text-gray-500 text-sm">No reviews yet. Be the first to review!</p>
+                        </div>
+                        } @else {
+                        <div class="space-y-4">
+                            @for (review of reviews; track review.id) {
+                            <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <p class="font-bold text-gray-900 text-sm">{{ review.user_name }}</p>
+                                        <p class="text-xs text-gray-500">{{ review.created_at | date:'mediumDate' }}</p>
+                                    </div>
+                                    <div class="flex text-amber-400">
+                                        @for (star of [1, 2, 3, 4, 5]; track star) {
+                                        <svg class="w-4 h-4" [class.text-amber-400]="star <= review.rating"
+                                            [class.text-gray-300]="star > review.rating" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                            </path>
+                                        </svg>
+                                        }
+                                    </div>
+                                </div>
+                                @if (review.comment) {
+                                <p class="text-sm text-gray-700 mt-2">{{ review.comment }}</p>
+                                }
+                            </div>
+                            }
+                        </div>
+                        }
+
+                        <!-- Add Review Form (Logged in users only) -->
+                        @if (authService.currentUser$ | async; as user) {
+                        @if (user.role === 'user') {
+                        <div class="mt-6 pt-6 border-t border-gray-100">
+                            <h5 class="text-sm font-bold text-gray-900 mb-3">Leave a Review</h5>
+                            <form (submit)="submitReview()" class="space-y-3">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Rating</label>
+                                    <div class="flex space-x-2">
+                                        @for (star of [1, 2, 3, 4, 5]; track star) {
+                                        <button type="button" (click)="newReview.rating = star"
+                                            class="focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded p-1 transition-colors">
+                                            <svg class="w-6 h-6 hover:scale-110 transition-transform"
+                                                [class.text-amber-400]="star <= newReview.rating"
+                                                [class.text-gray-300]="star > newReview.rating" fill="currentColor"
+                                                viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                        }
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Comment
+                                        (Optional)</label>
+                                    <textarea [(ngModel)]="newReview.comment" name="comment" rows="2"
+                                        class="block w-full rounded-xl border-gray-200 bg-gray-50 py-2.5 px-4 text-sm focus:border-indigo-500 focus:ring-indigo-500 transition-colors"
+                                        placeholder="Share your experience..."></textarea>
+                                </div>
+
+                                @if (reviewError) {
+                                <p class="text-xs text-red-600 font-medium">{{ reviewError }}</p>
+                                }
+
+                                <button type="submit" [disabled]="isSubmittingReview"
+                                    class="w-full bg-white border border-indigo-600 text-indigo-600 py-2.5 rounded-xl text-sm font-bold hover:bg-indigo-50 transition-colors disabled:opacity-50">
+                                    {{ isSubmittingReview ? 'Submitting...' : 'Submit Review' }}
+                                </button>
+                            </form>
+                        </div>
+                        }
+                        }
+                    </div> <!-- End of reviews section -->
+
+                    <!-- LEASE SELECTION FORM (Relocated to scrollable area) -->
+                    @if (showLeaseForm) {
+                    <div class="mt-8 animate-in fade-in slide-in-from-bottom-2 duration-300 space-y-6">
+                        <div class="mb-6">
+                            <h3 class="text-xl font-black text-gray-900 mb-1">Booking Request</h3>
+                            <p class="text-sm text-gray-500">Complete the details below to request a lease agreement.
+                            </p>
+                        </div>
+
+                        <!-- Property Summary Banner -->
+                        <div
+                            class="flex items-center justify-between bg-indigo-50 rounded-2xl px-5 py-4 border border-indigo-100">
+                            <div>
+                                <p class="text-[10px] text-indigo-500 font-bold uppercase tracking-widest">Unit</p>
+                                <p class="text-base font-bold text-gray-900">{{ selectedFlat?.unit_number }} / {{
+                                    selectedFlat?.tower_name }}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[10px] text-indigo-500 font-bold uppercase tracking-widest">Monthly Rent
+                                </p>
+                                <p class="text-lg font-extrabold text-indigo-600">₹{{ selectedFlat?.price |
+                                    number:'1.0-0' }}<span class="text-xs text-gray-400 font-normal">/mo</span></p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Start Date -->
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-600 uppercase tracking-widest mb-2">Lease
+                                    Start Date</label>
+                                <input type="date" [(ngModel)]="leaseForm.startDate" name="leaseStartDate"
+                                    [min]="minStartDate" (change)="recalculateEndDate()"
+                                    class="block w-full rounded-2xl border border-gray-200 bg-white px-5 py-3 text-sm text-gray-900 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all outline-none" />
+                            </div>
+
+                            <!-- Duration -->
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-600 uppercase tracking-widest mb-2">Lease
+                                    Duration</label>
+                                <div class="flex gap-3">
+                                    <div class="flex-1">
+                                        <select [(ngModel)]="leaseForm.leaseDurationMonths" name="leaseMonths"
+                                            (change)="recalculateEndDate()"
+                                            class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all outline-none appearance-none cursor-pointer">
+                                            @for (m of [1,2,3,4,5,6,7,8,9,10,11,12,18,24]; track m) {
+                                            <option [value]="m">{{ m }} Month{{ m > 1 ? 's' : '' }}</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="w-32">
+                                        <input type="number" [(ngModel)]="leaseForm.leaseDurationDays" name="leaseDays"
+                                            min="0" max="30" placeholder="Extra days" (input)="recalculateEndDate()"
+                                            class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all outline-none" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- End Date -->
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-gray-600 uppercase tracking-widest mb-2">Lease
+                                    End Date (Calculated)</label>
+                                <div
+                                    class="block w-full rounded-2xl border border-gray-100 bg-gray-50 px-5 py-3 text-sm text-gray-500 font-medium">
+                                    {{ leaseForm.endDate ? (leaseForm.endDate | date:'fullDate') : 'Select start date'
+                                    }}
+                                </div>
+                            </div>
+
+                            <!-- Total Payable -->
+                            <div
+                                class="bg-gradient-to-br from-emerald-50 to-white rounded-3xl p-6 border border-emerald-100 shadow-sm space-y-3">
+                                <p class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest">Initial
+                                    Payment
+                                    Details</p>
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-gray-600">First Month's Rent</span>
+                                    <span class="font-bold text-gray-900">₹{{ selectedFlat?.price | number:'1.0-0'
+                                        }}</span>
+                                </div>
+                                @if (selectedFlat?.security_deposit) {
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-gray-600">Security Deposit (Refundable)</span>
+                                    <span class="font-bold text-amber-700">₹{{ selectedFlat?.security_deposit |
+                                        number:'1.0-0' }}</span>
+                                </div>
+                                }
+                                <div class="border-t border-emerald-100 pt-3 flex justify-between items-center">
+                                    <span class="text-sm font-black text-emerald-900">Total Due on Confirmation</span>
+                                    <span class="text-2xl font-black text-emerald-600">₹{{ totalPayable | number:'1.0-0'
+                                        }}</span>
+                                </div>
+                                @if (leaseForm.endDate) {
+                                <p
+                                    class="text-[10px] text-emerald-600 font-medium bg-emerald-100/50 px-3 py-1 rounded-full w-fit">
+                                    Full lease ({{ leaseForm.leaseDurationMonths }} mo{{ leaseForm.leaseDurationDays > 0
+                                    ? ' + ' + leaseForm.leaseDurationDays + ' days' : '' }}): ~₹{{ fullLeaseCost |
+                                    number:'1.0-0' }}
+                                </p>
+                                }
+                            </div>
+
+                            <!-- Terms Checkbox -->
+                            <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                                <label class="flex items-start gap-3 cursor-pointer group">
+                                    <input type="checkbox" [(ngModel)]="leaseForm.leaseTermsAccepted" name="leaseTerms"
+                                        class="mt-0.5 h-5 w-5 rounded-lg border-gray-300 text-indigo-600 focus:ring-indigo-500 transition-all cursor-pointer" />
+                                    <span
+                                        class="text-xs text-gray-600 leading-relaxed group-hover:text-gray-900 transition-colors">
+                                        I accept the <span class="font-bold text-indigo-600">Lease Terms and
+                                            Conditions</span>. Rent is due on the 1st of each month. I understand this
+                                        is
+                                        a binding request for a residential lease.
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Error Message -->
+                        @if (leaseFormError) {
+                        <div
+                            class="p-3 rounded-xl bg-red-50 border border-red-100 text-red-600 text-xs font-bold flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            {{ leaseFormError }}
+                        </div>
+                        }
+                    </div>
+                    }
+                </div> <!-- End of scrollable area -->
+
+                <!-- Sticky bottom actions bar -->
+                <div
+                    class="p-6 md:p-8 border-t border-gray-100 bg-white/80 backdrop-blur-md flex-shrink-0 mt-auto w-full">
+                    @if (authService.currentUser$ | async; as user) {
+                    @if (user.role === 'user') {
+
+                    @if (showLeaseForm) {
+                    <div class="flex flex-col gap-3">
+                        <button (click)="bookFlat()" [disabled]="!leaseForm.startDate || !leaseForm.leaseTermsAccepted"
+                            class="w-full bg-indigo-600 text-white py-4 rounded-2xl text-base font-bold shadow-xl shadow-indigo-100 hover:bg-indigo-700 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                            Confirm Booking Request
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </button>
+                        <button (click)="showLeaseForm = false"
+                            class="w-full bg-white text-gray-500 py-3 rounded-2xl text-sm font-bold border border-gray-100 hover:bg-gray-50 hover:text-gray-700 transition-all">
+                            Cancel & Back to Details
+                        </button>
+                    </div>
+                    } @else {
+                    <button (click)="openLeaseForm(selectedFlat!)"
+                        [disabled]="selectedFlat.status === 'under_maintenance'"
+                        [class.opacity-50]="selectedFlat.status === 'under_maintenance'"
+                        [class.cursor-not-allowed]="selectedFlat.status === 'under_maintenance'"
+                        class="w-full bg-indigo-600 text-white py-4 rounded-2xl text-base font-bold shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:shadow-indigo-200 transition-all active:scale-95 flex items-center justify-center">
+                        {{ selectedFlat.status === 'under_maintenance' ? 'Under Maintenance' : 'Book Now' }}
+                        <svg *ngIf="selectedFlat.status !== 'under_maintenance'" class="w-5 h-5 ml-2" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </button>
+                    <button (click)="closeDetails()"
+                        class="w-full bg-white text-gray-500 py-3 rounded-2xl text-sm font-bold border border-gray-100 hover:bg-gray-50 hover:text-gray-700 transition-all text-center mt-3">
+                        Close
+                    </button>
+                    }
+
+                    }
+                    } @else {
+                    <a routerLink="/login" (click)="closeDetails()"
+                        class="w-full bg-indigo-600 text-white py-4 rounded-2xl text-center text-base font-bold shadow-xl shadow-indigo-100 hover:bg-indigo-700 transition-all block">
+                        Login to Book
+                    </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+    <!-- Tower Photo Modal -->
+    @if (isTowerPhotoModalOpen && selectedTower) {
+    <div
+        class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-md transition-all duration-300 animate-in fade-in">
+        <div (click)="$event.stopPropagation()"
+            class="relative max-w-5xl w-full bg-transparent flex flex-col items-center animate-in zoom-in duration-300">
+
+            <button (click)="closeTowerPhoto()"
+                class="absolute -top-12 right-0 p-2 text-white hover:text-gray-300 transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div class="bg-white p-2 rounded-2xl shadow-2xl overflow-hidden mb-4">
+                <img [src]="selectedTower.image_url" [alt]="selectedTower.name"
+                    class="max-h-[70vh] w-auto object-contain rounded-xl" />
+            </div>
+
+            <div class="text-white text-center">
+                <h3 class="text-2xl font-bold">{{ selectedTower.name }}</h3>
+                <p class="text-gray-300">{{ selectedTower.floors }} Floors • {{ selectedTower.description || 'Modern
+                    architectural design.' }}</p>
+            </div>
+        </div>
+    </div>
+    }
+</div>

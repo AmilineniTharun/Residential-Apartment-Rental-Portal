@@ -1,0 +1,1588 @@
+<div class="min-h-[calc(100vh-4rem)] bg-gray-50 flex flex-col md:flex-row">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-64 bg-white border-r border-gray-200 flex-shrink-0">
+        <div class="p-6">
+            <h2 class="text-xl font-bold text-gray-900 border-b border-gray-100 pb-4 mb-4">Admin Panel</h2>
+            <nav class="space-y-2">
+                <button (click)="setTab('overview')" [class.bg-indigo-50]="activeTab === 'overview'"
+                    [class.text-indigo-700]="activeTab === 'overview'"
+                    class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 transition-colors flex items-center">
+                    <svg class="mr-3 h-5 w-5" [class.text-indigo-500]="activeTab === 'overview'"
+                        [class.text-gray-400]="activeTab !== 'overview'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7m-9-8v8m-4 4h14" />
+                    </svg>
+                    Overview
+                </button>
+                <button (click)="setTab('towers')" [class.bg-indigo-50]="activeTab === 'towers'"
+                    [class.text-indigo-700]="activeTab === 'towers'"
+                    class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 transition-colors flex items-center">
+                    <svg class="mr-3 h-5 w-5" [class.text-indigo-500]="activeTab === 'towers'"
+                        [class.text-gray-400]="activeTab !== 'towers'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    Manage Towers
+                </button>
+                <button (click)="setTab('units')" [class.bg-indigo-50]="activeTab === 'units'"
+                    [class.text-indigo-700]="activeTab === 'units'"
+                    class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 transition-colors flex items-center">
+                    <svg class="mr-3 h-5 w-5" [class.text-indigo-500]="activeTab === 'units'"
+                        [class.text-gray-400]="activeTab !== 'units'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                    Manage Units
+                </button>
+                <button (click)="setTab('amenities')" [class.bg-indigo-50]="activeTab === 'amenities'"
+                    [class.text-indigo-700]="activeTab === 'amenities'"
+                    class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 transition-colors flex items-center">
+                    <svg class="mr-3 h-5 w-5" [class.text-indigo-500]="activeTab === 'amenities'"
+                        [class.text-gray-400]="activeTab !== 'amenities'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
+                    Manage Amenities
+                </button>
+                <button (click)="setTab('leases')" [class.bg-indigo-50]="activeTab === 'leases'"
+                    [class.text-indigo-700]="activeTab === 'leases'"
+                    class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 transition-colors flex items-center">
+                    <svg class="mr-3 h-5 w-5" [class.text-indigo-500]="activeTab === 'leases'"
+                        [class.text-gray-400]="activeTab !== 'leases'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Lease Agreements
+                </button>
+                <button (click)="setTab('bookings')" [class.bg-indigo-50]="activeTab === 'bookings'"
+                    [class.text-indigo-700]="activeTab === 'bookings'"
+                    class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 transition-colors flex items-center">
+                    <svg class="mr-3 h-5 w-5" [class.text-indigo-500]="activeTab === 'bookings'"
+                        [class.text-gray-400]="activeTab !== 'bookings'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                    Manage Bookings
+                </button>
+                <button (click)="setTab('maintenance')" [class.bg-indigo-50]="activeTab === 'maintenance'"
+                    [class.text-indigo-700]="activeTab === 'maintenance'"
+                    class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 transition-colors flex items-center">
+                    <svg class="mr-3 h-5 w-5" [class.text-indigo-500]="activeTab === 'maintenance'"
+                        [class.text-gray-400]="activeTab !== 'maintenance'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                        </path>
+                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    Maintenance Requests
+                </button>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-6 md:p-8 overflow-y-auto">
+
+        @if (isLoading) {
+        <div class="flex justify-center items-center h-64">
+            <svg class="animate-spin h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                </path>
+            </svg>
+        </div>
+        } @else {
+
+        @if (errorMessage) {
+        <div class="bg-red-50 p-4 rounded-xl mb-6 flex items-start">
+            <svg class="h-5 w-5 text-red-400 mt-0.5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <p class="text-sm text-red-700">{{ errorMessage }}</p>
+        </div>
+        }
+
+        @if (actionMessage) {
+        <div class="bg-green-50 p-4 rounded-xl mb-6 flex items-start">
+            <svg class="h-5 w-5 text-green-400 mt-0.5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <p class="text-sm font-medium text-green-800">{{ actionMessage }}</p>
+        </div>
+        }
+
+        <!-- Tab: Overview -->
+        @if (activeTab === 'overview') {
+        <div>
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
+                <p class="mt-1 text-sm text-gray-500">Key metrics and recent activity for your properties.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center">
+                    <div class="p-3 rounded-xl bg-indigo-50 text-indigo-600 mr-4">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Total Units</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ stats.totalUnits }}</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center">
+                    <div class="p-3 rounded-xl bg-green-50 text-green-600 mr-4">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Available Units</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ stats.availableUnits }}</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center">
+                    <div class="p-3 rounded-xl bg-yellow-50 text-yellow-600 mr-4">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Pending Bookings</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ stats.pendingBookings }}</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center">
+                    <div class="p-3 rounded-xl bg-blue-50 text-blue-600 mr-4">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Active Tenants</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ stats.totalTenants }}</p>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center col-span-1 md:col-span-2 lg:col-span-4">
+                    <div class="p-3 rounded-xl bg-emerald-50 text-emerald-600 mr-4">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M12 16V15m0 1v-8" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Monthly Revenue (Rented Units)</p>
+                        <p class="text-2xl font-bold text-gray-900">₹{{ stats.revenue | number:'1.2-2' }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                <div class="flex items-center justify-center p-12 flex-col">
+                    <svg class="w-16 h-16 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                        </path>
+                    </svg>
+                    <p class="text-gray-500 text-sm">Visual Analytics Chart Placeholder</p>
+                </div>
+            </div>
+        </div>
+        }
+
+        <!-- Tab: Towers -->
+        @if (activeTab === 'towers') {
+        <div>
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Manage Towers</h1>
+                    <p class="mt-1 text-sm text-gray-500">Add and view real estate property towers.</p>
+                </div>
+                <button (click)="toggleTowerForm()"
+                    class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-sm hover:bg-indigo-700 transition-colors">
+                    {{ isAddingTower ? (isEditingTower ? 'Cancel Edit' : 'Cancel Add') : '+ New Tower' }}
+                </button>
+            </div>
+
+            @if (isAddingTower) {
+            <!-- Add/Edit Tower Form -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ isEditingTower ? 'Edit Tower Details' : 'Add New
+                    Tower' }}</h3>
+                <form (ngSubmit)="addTower()" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Tower Name</label>
+                            <input type="text" [(ngModel)]="newTower.name" name="towerName" required
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                placeholder="e.g. Block A">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Total Floors</label>
+                            <input type="number" [(ngModel)]="newTower.floors" name="towerFloors" required min="1"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                placeholder="10">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">State</label>
+                            <select [(ngModel)]="newTower.state" name="towerState"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                (change)="onTowerStateChange()">
+                                <option value="">-- Select State --</option>
+                                @for (state of INDIAN_STATES; track state) {
+                                <option [value]="state">{{ state }}</option>
+                                }
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                            @if (citiesForSelectedState.length > 0) {
+                            <select [(ngModel)]="newTower.city" name="towerCity"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option value="">-- Select City --</option>
+                                @for (city of citiesForSelectedState; track city) {
+                                <option [value]="city">{{ city }}</option>
+                                }
+                            </select>
+                            } @else {
+                            <input type="text" [(ngModel)]="newTower.city" name="towerCity"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                [placeholder]="newTower.state ? 'Enter city name' : 'Select a state first'">
+                            }
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Area</label>
+                            <input type="text" [(ngModel)]="newTower.area" name="towerArea"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                placeholder="e.g. Madhapur, Andheri">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Street</label>
+                            <input type="text" [(ngModel)]="newTower.street" name="towerStreet"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                placeholder="e.g. 100 Feet Road">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Units Per Floor</label>
+                            <input type="number" [(ngModel)]="newTower.units_per_floor" name="towerUnitsPerFloor"
+                                min="1"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                placeholder="e.g. 4">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-sm font-medium text-gray-700">Tower Description</label>
+                            <button type="button" (click)="insertLink('tower')"
+                                class="text-xs text-indigo-600 hover:text-indigo-800 font-semibold flex items-center">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                                </svg>
+                                Insert Link (Google Maps)
+                            </button>
+                        </div>
+                        <textarea id="towerDescription" [(ngModel)]="newTower.description" name="towerDescription"
+                            rows="3"
+                            class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            placeholder="Add details about location, surroundings, etc. Highlight text and click 'Insert Link' to add maps."></textarea>
+                    </div>
+                    <div class="flex gap-4">
+                        <button type="submit" [disabled]="!newTower.name || !newTower.floors"
+                            class="flex-1 bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm hover:bg-indigo-700 disabled:opacity-50 transition-colors">
+                            {{ isEditingTower ? 'Update Tower' : 'Save Tower ' }}
+                        </button>
+                        <button *ngIf="isEditingTower" type="button" (click)="cancelTowerEdit()"
+                            class="bg-gray-100 text-gray-700 px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-200 transition-colors">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+            }
+
+            <!-- Tower List Table -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Location</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Description</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Floors & Units</th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @for (tower of towers; track tower.id) {
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">#{{ tower.id }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ tower.name }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">
+                                <div class="max-w-[150px] truncate" [title]="formatTowerLocation(tower)">
+                                    {{ formatTowerLocation(tower) }}
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">
+                                <div class="max-w-xs truncate" [innerHTML]="tower.description || 'No description'">
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {{ tower.floors }} Flrs
+                                @if (tower.units_per_floor) {
+                                <span class="text-xs text-gray-400 block">{{ tower.units_per_floor }} Units/Flr</span>
+                                }
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                                <button (click)="viewTowerUnits(tower.name)"
+                                    class="text-indigo-600 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 px-3 py-1 rounded-lg transition-colors font-medium">
+                                    View Units
+                                </button>
+                                <button (click)="editTower(tower)"
+                                    class="text-emerald-600 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 px-3 py-1 rounded-lg transition-colors font-medium">
+                                    Edit
+                                </button>
+                                <button (click)="deleteTower(tower.id)"
+                                    class="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 px-3 py-1 rounded-lg transition-colors font-medium">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                        @if (towers.length === 0) {
+                        <tr>
+                            <td colspan="3" class="px-6 py-8 text-center text-sm text-gray-500">No towers found. Create
+                                one above!</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        }
+
+        <!-- Tab: Amenities -->
+        @if (activeTab === 'amenities') {
+        <div>
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Manage Amenities</h1>
+                    <p class="mt-1 text-sm text-gray-500">Add and view property amenities.</p>
+                </div>
+            </div>
+
+            <!-- Add Amenity Form -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Add New Amenity</h3>
+                <form (ngSubmit)="addAmenity()" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-end">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Amenity Name</label>
+                        <input type="text" [(ngModel)]="newAmenity.name" name="amenityName" required
+                            class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            placeholder="e.g. Swimming Pool">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                        <input type="text" [(ngModel)]="newAmenity.description" name="amenityDesc"
+                            class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            placeholder="Optional details">
+                    </div>
+                    <div>
+                        <button type="submit" [disabled]="!newAmenity.name"
+                            class="w-full bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm hover:bg-indigo-700 disabled:opacity-50 transition-colors">
+                            Save Amenity
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Amenities List -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Description</th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @for (amenity of amenities; track amenity.id) {
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">#{{ amenity.id }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ amenity.name }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">{{ amenity.description }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button (click)="deleteAmenity(amenity.id)"
+                                    class="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 px-3 py-1 rounded-lg transition-colors font-medium">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                        @if (amenities.length === 0) {
+                        <tr>
+                            <td colspan="3" class="px-6 py-8 text-center text-sm text-gray-500">No amenities found.
+                                Create one above!</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Manage Amenity Status Section -->
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-gray-900 uppercase tracking-wider">Manage Amenity Maintenance</h2>
+                    <p class="mt-1 text-sm text-gray-500">Set the operational status of amenities for specific towers.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Update Status Form -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                            <h3 class="text-sm font-bold text-gray-900 mb-6 uppercase tracking-widest">Update
+                                Operational
+                                Status</h3>
+                            <div class="space-y-5">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Select
+                                        Tower</label>
+                                    <select [(ngModel)]="selectedAmenityTowerId" (change)="onAmenityTowerChange()"
+                                        class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                        <option [ngValue]="null">-- Choose Tower --</option>
+                                        @for (tower of towers; track tower.id) {
+                                        <option [value]="tower.id">{{ tower.name }}</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Select
+                                        Amenity</label>
+                                    <select [(ngModel)]="selectedAmenityId"
+                                        class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                        <option [ngValue]="null">-- Choose Amenity --</option>
+                                        @for (amt of towerAmenityStatuses; track amt.id) {
+                                        <option [value]="amt.amenity_id">{{ amt.name }}</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Service
+                                        Status</label>
+                                    <select [(ngModel)]="amenityStatus"
+                                        class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                        <option value="Open">✅ Open / Available</option>
+                                        <option value="Closed">🚫 Closed</option>
+                                        <option value="Under Maintenance">🛠 Under Maintenance</option>
+                                    </select>
+                                </div>
+
+                                <button (click)="updateAmenityStatus()" [disabled]="isUpdatingStatus"
+                                    class="w-full bg-indigo-600 text-white px-4 py-3 rounded-xl text-sm font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 disabled:opacity-50 transition-all flex items-center justify-center">
+                                    <svg *ngIf="isUpdatingStatus" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                                        fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                            stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor"
+                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                        </path>
+                                    </svg>
+                                    {{ isUpdatingStatus ? 'Updating...' : 'Update Status' }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Status Summary Table -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+                            <div class="px-6 py-4 bg-gray-50 border-b border-gray-100">
+                                <h3 class="text-xs font-bold text-gray-700 uppercase tracking-widest">Tower Amenity
+                                    Inventory & Status</h3>
+                            </div>
+                            @if (selectedAmenityTowerId) {
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-white">
+                                    <tr>
+                                        <th
+                                            class="px-6 py-3 text-left text-[10px] font-black text-gray-400 uppercase tracking-wider">
+                                            Amenity</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-[10px] font-black text-gray-400 uppercase tracking-wider">
+                                            Current Status</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-[10px] font-black text-gray-400 uppercase tracking-wider">
+                                            Last Updated</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-50">
+                                    @for (stat of towerAmenityStatuses; track stat.amenity_id) {
+                                    <tr class="hover:bg-gray-50/50 transition-colors">
+                                        <td class="px-6 py-4">
+                                            <div class="text-sm font-bold text-gray-900">{{ stat.name }}</div>
+                                            <div class="text-[10px] text-gray-600 mt-0.5 leading-relaxed">{{
+                                                stat.description }}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span [class.bg-green-100]="stat.status === 'Open'"
+                                                [class.text-green-800]="stat.status === 'Open'"
+                                                [class.border-green-200]="stat.status === 'Open'"
+                                                [class.bg-red-100]="stat.status === 'Closed'"
+                                                [class.text-red-800]="stat.status === 'Closed'"
+                                                [class.border-red-200]="stat.status === 'Closed'"
+                                                [class.bg-yellow-100]="stat.status === 'Under Maintenance'"
+                                                [class.text-yellow-800]="stat.status === 'Under Maintenance'"
+                                                [class.border-yellow-200]="stat.status === 'Under Maintenance'"
+                                                class="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border">
+                                                {{ stat.status }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                            {{ stat.updated_at ? (stat.updated_at | date:'medium':'UTC') : 'Default' }}
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            } @else {
+                            <div class="p-12 text-center">
+                                <svg class="w-12 h-12 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                                <p class="text-gray-400 text-sm italic">Select a tower to view its amenity statuses</p>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+
+        <!-- Tab: Units -->
+
+        @if (activeTab === 'units') {
+        <div>
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Manage Units</h1>
+                    <p class="mt-1 text-sm text-gray-500">Overview of all real estate units in the inventory.</p>
+                </div>
+                <button (click)="toggleForm()"
+                    class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-sm hover:bg-indigo-700 transition-colors">
+                    {{ isAddingUnit ? (isEditingUnit ? 'Cancel Edit' : 'Cancel Add') : '+ New Unit' }}
+                </button>
+            </div>
+
+            @if (isAddingUnit) {
+            <!-- Add Unit Form -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ isEditingUnit ? 'Edit Unit Details' : 'Add New
+                    Unit' }}</h3>
+                <form (ngSubmit)="addUnit()" class="space-y-6">
+                    <!-- Row 1: Tower + Floor + Wing -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Select Tower <span
+                                    class="text-red-500">*</span></label>
+                            <select [(ngModel)]="newUnit.tower_id" name="unitTower" required (change)="onTowerChange()"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option value="">-- Choose a Tower --</option>
+                                @for (tower of towers; track tower.id) {
+                                <option [value]="tower.id">{{ tower.name }}</option>
+                                }
+                            </select>
+                            @if (towers.length === 0) {
+                            <p class="text-[10px] text-red-500 mt-1 font-medium italic">* Create a tower first in
+                                'Manage Towers'</p>
+                            }
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Floor <span
+                                    class="text-red-500">*</span></label>
+                            @if (floorOptions.length > 0) {
+                            <select [(ngModel)]="newUnit.floor" name="unitFloor" required
+                                (change)="onFloorOrWingChange()"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option [ngValue]="null">-- Select Floor --</option>
+                                @for (f of floorOptions; track f) {
+                                <option [ngValue]="f">Floor {{ f }}</option>
+                                }
+                            </select>
+                            } @else {
+                            <p class="text-xs italic text-gray-400 mt-2">Select a tower first</p>
+                            }
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Wing</label>
+                            <select [(ngModel)]="newUnit.wing" name="unitWing" (change)="onFloorOrWingChange()"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option value="">-- No Wing --</option>
+                                <option value="North">North</option>
+                                <option value="South">South</option>
+                                <option value="East">East</option>
+                                <option value="West">West</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Unit Number + BHK + Location (read-only from tower) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Unit Name / Number <span
+                                    class="text-red-500">*</span></label>
+                            <input type="text" [(ngModel)]="newUnit.unit_number" name="unitNumber" required
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                placeholder="Auto-filled or type e.g. 101-N">
+                            <p class="text-[10px] text-gray-400 mt-1">Auto-suggested from Floor + Wing. You can edit it.
+                            </p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">BHK <span
+                                    class="text-red-500">*</span></label>
+                            <input type="number" [(ngModel)]="newUnit.bhk" name="unitBhk" required min="1" max="10"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                placeholder="2">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Location <span
+                                    class="text-xs text-gray-400">(from tower)</span></label>
+                            <input type="text" [(ngModel)]="newUnit.location" name="unitLocation"
+                                class="block w-full rounded-xl border-gray-200 bg-indigo-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                placeholder="Auto-filled from tower">
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Price + Security Deposit -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Monthly Rent (₹) <span
+                                    class="text-red-500">*</span></label>
+                            <input type="number" [(ngModel)]="newUnit.price" name="unitPrice" required min="1"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                placeholder="15000">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Security Deposit (₹)</label>
+                            <input type="number" [(ngModel)]="newUnit.security_deposit" name="unitSecurityDeposit"
+                                min="0"
+                                class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                placeholder="50000">
+                        </div>
+                    </div>
+                    <div class="col-span-1 md:col-span-2 lg:col-span-3">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-sm font-medium text-gray-700">Unit Description</label>
+                            <button type="button" (click)="insertLink('unit')"
+                                class="text-xs text-indigo-600 hover:text-indigo-800 font-semibold flex items-center">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                                </svg>
+                                Insert Link
+                            </button>
+                        </div>
+                        <textarea id="unitDescription" [(ngModel)]="newUnit.description" name="unitDescription" rows="3"
+                            class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            placeholder="Unit specific details (defaults from tower)"></textarea>
+                    </div>
+                    <div class="col-span-1 md:col-span-2 lg:col-span-3">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Upload Unit Images</label>
+                        <div class="flex items-center justify-center w-full" (dragover)="onDragOver($event)"
+                            (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+                            <label for="dropzone-file"
+                                [ngClass]="{'border-indigo-500 bg-indigo-50': isDragging, 'border-gray-300 bg-gray-50': !isDragging}"
+                                class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer hover:bg-indigo-50 transition-colors">
+                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg class="w-8 h-8 mb-3 text-indigo-500" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                    </svg>
+                                    <p class="mb-2 text-sm text-gray-500"><span
+                                            class="font-semibold text-indigo-600">Click to
+                                            upload</span> or drag and drop</p>
+                                    <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                </div>
+                                <input id="dropzone-file" type="file" class="hidden" multiple accept="image/*"
+                                    (change)="onFilesSelected($event)" />
+                            </label>
+                        </div>
+                        <div *ngIf="selectedFiles.length > 0"
+                            class="mt-4 p-4 bg-white border border-gray-100 shadow-sm rounded-xl">
+                            <h4 class="text-sm font-bold text-gray-900 mb-3 flex items-center justify-between">
+                                <span>Selected Files ({{selectedFiles.length}})</span>
+                                <span class="text-xs font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded-md">Select
+                                    one to set as default cover</span>
+                            </h4>
+                            <div class="space-y-2">
+                                <div *ngFor="let file of selectedFiles; let i = index"
+                                    class="flex items-center justify-between p-3 rounded-lg border transition-colors cursor-pointer"
+                                    [ngClass]="{'border-indigo-500 bg-indigo-50': defaultImageIndex === i, 'border-gray-200 bg-white hover:border-indigo-300': defaultImageIndex !== i}"
+                                    (click)="setDefaultImage(i)">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <input type="radio" [checked]="defaultImageIndex === i"
+                                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium"
+                                                [ngClass]="{'text-indigo-900': defaultImageIndex === i, 'text-gray-900': defaultImageIndex !== i}">
+                                                {{ file.name }}</p>
+                                            <p class="text-xs text-gray-500">{{ (file.size / 1024 / 1024).toFixed(2) }}
+                                                MB</p>
+                                        </div>
+                                    </div>
+                                    <span *ngIf="defaultImageIndex === i"
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-800">
+                                        Default Preview
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Amenities Selection Section -->
+                <div class="mt-8 pt-6 border-t border-gray-100">
+                    <label class="block text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider">Select
+                        Amenities</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                        @for (amt of amenities; track amt.id) {
+                        <label
+                            class="relative flex items-center p-3 rounded-xl border border-gray-100 bg-gray-50 hover:bg-white hover:border-indigo-200 cursor-pointer transition-all group">
+                            <input type="checkbox" (change)="toggleAmenity(amt.id)"
+                                [checked]="newUnit.amenity_ids.includes(amt.id)"
+                                class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                            <span class="ml-3 text-sm font-medium text-gray-700 group-hover:text-indigo-700">{{ amt.name
+                                }}</span>
+                        </label>
+                        }
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button type="button" (click)="addUnit()"
+                        [disabled]="!newUnit.tower_id || !newUnit.unit_number || !newUnit.bhk || !newUnit.price || (!isEditingUnit && selectedFiles.length === 0)"
+                        class="w-full md:w-auto bg-indigo-600 text-white px-8 py-3 rounded-xl text-base font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 disabled:opacity-50 transition-all active:scale-95">
+                        {{ isEditingUnit ? 'Update Unit with Amenities' : 'Save Unit with Amenities' }}
+                    </button>
+                </div>
+            </div>
+            }
+
+            <!-- Filter Badge -->
+            <div *ngIf="selectedTowerFilter" class="mb-6 flex items-center justify-between">
+                <div
+                    class="inline-flex items-center px-4 py-2 rounded-xl bg-indigo-50 border border-indigo-100 shadow-sm animate-in fade-in slide-in-from-left-2 duration-300">
+                    <span class="text-xs font-bold text-indigo-700 uppercase tracking-wider mr-2">Filtering
+                        Tower:</span>
+                    <span class="text-sm font-medium text-indigo-900 mr-3">{{ selectedTowerFilter }}</span>
+                    <button (click)="clearTowerFilter()"
+                        class="p-1 hover:bg-indigo-100 rounded-lg transition-colors group">
+                        <svg class="w-4 h-4 text-indigo-400 group-hover:text-indigo-600" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="text-sm text-gray-500 font-medium">
+                    Showing {{ filteredUnits.length }} unit{{ filteredUnits.length === 1 ? '' : 's' }}
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Unit</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Tower</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Floor</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Wing</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Location</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Description</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                BHK</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Price / mo</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Security Deposit</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status</th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @for (unit of filteredUnits; track unit.id) {
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{
+                                unit.unit_number }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ unit.tower_name }}</td>
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                                @if (unit.floor) {
+                                <span
+                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+                                    Floor {{ unit.floor }}
+                                </span>
+                                } @else { <span class="text-gray-300">—</span> }
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                                @if (unit.wing) {
+                                <span
+                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-50 text-purple-700">
+                                    {{ unit.wing }}
+                                </span>
+                                } @else { <span class="text-gray-300">—</span> }
+                            </td>
+                            <td class="px-4 py-4 text-sm text-gray-500">
+                                <div class="max-w-[120px] truncate" [title]="unit.location || ''">
+                                    {{ unit.location || '—' }}
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">
+                                <div class="max-w-xs truncate" [innerHTML]="unit.description || 'No description'">
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ unit.bhk }} BHK</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">₹{{ unit.price }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹{{ unit.security_deposit ?? 0
+                                }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                <div class="flex flex-col items-center gap-1">
+                                    <span [class.bg-green-100]="unit.status === 'available'"
+                                        [class.text-green-800]="unit.status === 'available'"
+                                        [class.bg-yellow-100]="unit.status === 'pending'"
+                                        [class.text-yellow-800]="unit.status === 'pending'"
+                                        [class.bg-blue-100]="unit.status === 'rented'"
+                                        [class.text-blue-800]="unit.status === 'rented'"
+                                        [class.bg-amber-100]="unit.status === 'under_maintenance'"
+                                        [class.text-amber-800]="unit.status === 'under_maintenance'"
+                                        [class.bg-gray-100]="unit.status !== 'available' && unit.status !== 'pending' && unit.status !== 'rented' && unit.status !== 'under_maintenance'"
+                                        [class.text-gray-800]="unit.status !== 'available' && unit.status !== 'pending' && unit.status !== 'rented' && unit.status !== 'under_maintenance'"
+                                        class="px-2.5 py-0.5 rounded-full text-xs font-medium uppercase tracking-wide">
+                                        {{ unit.status?.replace('_', ' ') }}
+                                    </span>
+                                    <button *ngIf="unit.status === 'available'"
+                                        (click)="toggleMaintenanceStatus(unit, 'under_maintenance')"
+                                        class="text-[10px] text-amber-600 hover:text-amber-800 hover:underline font-semibold uppercase tracking-tighter">
+                                        Set Maintenance
+                                    </button>
+                                    <button *ngIf="unit.status === 'under_maintenance'"
+                                        (click)="toggleMaintenanceStatus(unit, 'available')"
+                                        class="text-[10px] text-emerald-600 hover:text-emerald-800 hover:underline font-semibold uppercase tracking-tighter">
+                                        Set Available
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button *ngIf="unit.status === 'rented'" (click)="vacateUnit(unit.id)"
+                                    class="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 px-3 py-1 rounded-lg transition-colors font-medium">
+                                    Vacate
+                                </button>
+                                <button *ngIf="unit.status === 'available' || unit.status === 'under_maintenance'"
+                                    (click)="editUnit(unit)"
+                                    class="text-indigo-600 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 px-3 py-1 rounded-lg transition-colors font-medium">
+                                    Edit
+                                </button>
+                                <button *ngIf="unit.status === 'available'" (click)="deleteUnit(unit.id)"
+                                    class="ml-2 text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 px-3 py-1 rounded-lg transition-colors font-medium">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                        @if (units.length === 0) {
+                        <tr>
+                            <td colspan="6" class="px-6 py-8 text-center text-sm text-gray-500">No units found in the
+                                system.</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        }
+
+        <!-- Tab: Lease Agreements -->
+        @if (activeTab === 'leases') {
+        <div>
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Lease Agreements</h1>
+                    <p class="mt-1 text-sm text-gray-500">View and download lease agreements for all approved bookings.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center">
+                    <div class="p-3 rounded-xl bg-indigo-50 text-indigo-600 mr-4">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Total Active Leases</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ leases.length }}</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center">
+                    <div class="p-3 rounded-xl bg-emerald-50 text-emerald-600 mr-4">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Leases with Dates Set</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ leasesWithDates }}</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center">
+                    <div class="p-3 rounded-xl bg-yellow-50 text-yellow-600 mr-4">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Pending Dates (TBD)</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ leasesPendingDates }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lease Table -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Tenant</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Unit</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Monthly Rent</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Lease Start</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Lease End</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Booking Date</th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @for (lease of leases; track lease.booking_id) {
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-sm mr-3">
+                                        {{ lease.tenant_email[0].toUpperCase() }}
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-900">{{ lease.tenant_email }}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <p class="text-sm font-medium text-gray-900">Unit {{ lease.unit_number }}</p>
+                                <p class="text-xs text-gray-500">{{ lease.tower_name }}</p>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
+                                ₹{{ lease.monthly_rent | number:'1.0-0' }}/mo
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                @if (lease.start_date) {
+                                <span class="text-gray-600">{{ lease.start_date | date:'mediumDate' }}</span>
+                                } @else {
+                                <span class="text-yellow-500 font-medium italic text-xs">TBD</span>
+                                }
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                @if (lease.end_date) {
+                                <span class="text-gray-600">{{ lease.end_date | date:'mediumDate' }}</span>
+                                } @else {
+                                <span class="text-yellow-500 font-medium italic text-xs">TBD</span>
+                                }
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {{ lease.booking_date | date:'mediumDate' }}
+                            </td>
+                            <td class="px-6 py-4 text-right text-sm font-medium">
+                                <div class="flex flex-col gap-2 items-end">
+                                    <button (click)="downloadLease(lease.booking_id, lease.unit_number)"
+                                        class="inline-flex items-center px-3 py-1.5 bg-indigo-600 text-white text-xs font-bold rounded-lg hover:bg-indigo-700 transition-colors shadow-sm">
+                                        <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                        PDF
+                                    </button>
+                                    <button (click)="toggleLeaseAction(lease.booking_id, 'extend')"
+                                        class="inline-flex items-center px-3 py-1.5 bg-emerald-600 text-white text-xs font-bold rounded-lg hover:bg-emerald-700 transition-colors">
+                                        🗓 Extend
+                                    </button>
+                                    <button (click)="toggleLeaseAction(lease.booking_id, 'terminate')"
+                                        class="inline-flex items-center px-3 py-1.5 bg-red-500 text-white text-xs font-bold rounded-lg hover:bg-red-600 transition-colors">
+                                        🚫 Terminate
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Inline extend/terminate form row -->
+                        @if (leaseActionForm[lease.booking_id]) {
+                        <tr class="bg-gray-50">
+                            <td colspan="7" class="px-6 py-4">
+                                @if (leaseActionForm[lease.booking_id] === 'extend') {
+                                <div
+                                    class="flex items-center gap-3 bg-emerald-50 rounded-xl p-3 border border-emerald-200">
+                                    <span class="text-sm font-semibold text-emerald-800">New End Date:</span>
+                                    <input type="date" [(ngModel)]="leaseActionDate[lease.booking_id]"
+                                        class="px-3 py-2 rounded-lg border border-emerald-300 text-sm focus:ring-2 focus:ring-emerald-400 focus:outline-none" />
+                                    <button (click)="doAdminExtend(lease.booking_id)"
+                                        [disabled]="!leaseActionDate[lease.booking_id] || isLeaseActing"
+                                        class="bg-emerald-600 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-emerald-700 transition-all disabled:opacity-50">
+                                        {{ isLeaseActing ? 'Saving...' : 'Confirm Extension' }}
+                                    </button>
+                                    <button (click)="leaseActionForm[lease.booking_id] = null"
+                                        class="text-gray-500 text-sm hover:text-gray-800">Cancel</button>
+                                </div>
+                                } @else {
+                                <div class="flex items-center gap-3 bg-red-50 rounded-xl p-3 border border-red-200">
+                                    <svg class="w-5 h-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                    </svg>
+                                    <span class="text-sm font-semibold text-red-800">Termination Date:</span>
+                                    <input type="date" [(ngModel)]="leaseActionDate[lease.booking_id]"
+                                        class="px-3 py-2 rounded-lg border border-red-300 text-sm focus:ring-2 focus:ring-red-400 focus:outline-none" />
+                                    <button (click)="doAdminTerminate(lease.booking_id)"
+                                        [disabled]="!leaseActionDate[lease.booking_id] || isLeaseActing"
+                                        class="bg-red-600 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-red-700 transition-all disabled:opacity-50">
+                                        {{ isLeaseActing ? 'Terminating...' : 'Confirm Termination' }}
+                                    </button>
+                                    <button (click)="leaseActionForm[lease.booking_id] = null"
+                                        class="text-gray-500 text-sm hover:text-gray-800">Cancel</button>
+                                </div>
+                                }
+                            </td>
+                        </tr>
+                        }
+                        }
+                        @if (leases.length === 0) {
+                        <tr>
+                            <td colspan="7" class="px-6 py-10 text-center text-sm text-gray-500">
+                                <svg class="w-10 h-10 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                No active lease agreements yet. Approve bookings to see them here.
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        }
+
+        <!-- Lease Requests (User Requests) -->
+        @if (activeTab === 'leases' && leaseRequests.length > 0) {
+        <div class="mt-8">
+            <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-black text-white"
+                    [class.bg-yellow-500]="pendingLeaseRequests > 0" [class.bg-gray-400]="pendingLeaseRequests === 0">
+                    {{ pendingLeaseRequests }}
+                </span>
+                Tenant Lease Requests
+            </h2>
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                Tenant</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                Unit</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                Request</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                Current End Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                Requested On</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                Status</th>
+                            <th class="px-6 py-3 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @for (req of leaseRequests; track req.id) {
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ req.tenant_email }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                <p class="font-medium text-gray-900">Unit {{ req.unit_number }}</p>
+                                <p class="text-xs text-gray-500">{{ req.tower_name }}</p>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                @if (req.request_type === 'terminate') {
+                                <span
+                                    class="inline-flex items-center text-xs font-bold bg-red-100 text-red-800 px-2.5 py-1 rounded-full">🚫
+                                    Terminate</span>
+                                } @else if (req.request_type === 'extend') {
+                                <span
+                                    class="inline-flex items-center text-xs font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full">🗓
+                                    Extend to {{ req.new_end_date | date:'shortDate' }}</span>
+                                } @else if (req.request_type === 'vacate') {
+                                <span
+                                    class="inline-flex items-center text-xs font-bold bg-rose-100 text-rose-800 px-2.5 py-1 rounded-full">🚪
+                                    Vacate on {{ req.new_end_date | date:'shortDate' }}</span>
+                                }
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                                {{ req.end_date ? (req.end_date | date:'mediumDate') : 'TBD' }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ req.requested_at |
+                                date:'mediumDate' }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span [class.bg-yellow-100]="req.status === 'pending'"
+                                    [class.text-yellow-800]="req.status === 'pending'"
+                                    [class.bg-green-100]="req.status === 'approved'"
+                                    [class.text-green-800]="req.status === 'approved'"
+                                    [class.bg-red-100]="req.status === 'rejected'"
+                                    [class.text-red-800]="req.status === 'rejected'"
+                                    class="px-2.5 py-1 inline-flex text-xs leading-5 font-bold rounded-full uppercase tracking-wide">
+                                    {{ req.status }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right">
+                                @if (req.status === 'pending') {
+                                <div class="flex flex-col gap-1.5 items-end">
+                                    <div class="flex gap-1.5">
+                                        <input type="date" [(ngModel)]="reqApproveDate[req.id]"
+                                            [class.focus:ring-emerald-400]="req.request_type === 'extend'"
+                                            [class.focus:ring-red-400]="req.request_type === 'terminate'"
+                                            [class.focus:ring-rose-400]="req.request_type === 'vacate'"
+                                            class="px-2 py-1 border border-gray-300 rounded-lg text-xs focus:ring-1" />
+
+                                        <button
+                                            (click)="approveLeaseReq(req.id, reqApproveDate[req.id] || req.new_end_date)"
+                                            [class.bg-emerald-600]="req.request_type === 'extend'"
+                                            [class.hover:bg-emerald-700]="req.request_type === 'extend'"
+                                            [class.bg-red-600]="req.request_type === 'terminate'"
+                                            [class.hover:bg-red-700]="req.request_type === 'terminate'"
+                                            [class.bg-rose-600]="req.request_type === 'vacate'"
+                                            [class.hover:bg-rose-700]="req.request_type === 'vacate'"
+                                            class="text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all">
+                                            Approve
+                                        </button>
+                                    </div>
+                                    <button (click)="rejectLeaseReq(req.id)"
+                                        class="text-gray-500 hover:text-gray-800 text-xs font-medium underline">
+                                        Reject
+                                    </button>
+                                </div>
+                                } @else {
+                                <div>
+                                    <p class="text-xs text-gray-400 italic">{{ req.admin_note || 'No note' }}</p>
+                                    <p class="text-xs text-gray-400">{{ req.resolved_at | date:'mediumDate' }}</p>
+                                </div>
+                                }
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        }
+
+        <!-- Tab: Bookings -->
+        @if (activeTab === 'bookings') {
+        <div>
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Manage Bookings</h1>
+                    <p class="mt-1 text-sm text-gray-500">Review apartment booking requests from users.</p>
+                </div>
+            </div>
+
+            <!-- Booking Sub-navigation -->
+            <div class="flex flex-wrap gap-2 mb-6">
+                <button (click)="setBookingFilter('all')" [class.bg-indigo-600]="bookingStatusFilter === 'all'"
+                    [class.text-white]="bookingStatusFilter === 'all'" [class.bg-white]="bookingStatusFilter !== 'all'"
+                    [class.text-gray-600]="bookingStatusFilter !== 'all'"
+                    class="px-4 py-2 rounded-xl text-sm font-bold shadow-sm transition-all border border-gray-100 hover:shadow-md">
+                    All
+                </button>
+                <button (click)="setBookingFilter('approved')" [class.bg-green-600]="bookingStatusFilter === 'approved'"
+                    [class.text-white]="bookingStatusFilter === 'approved'"
+                    [class.bg-white]="bookingStatusFilter !== 'approved'"
+                    [class.text-gray-600]="bookingStatusFilter !== 'approved'"
+                    class="px-4 py-2 rounded-xl text-sm font-bold shadow-sm transition-all border border-gray-100 hover:shadow-md">
+                    Approved
+                </button>
+                <button (click)="setBookingFilter('pending')" [class.bg-yellow-500]="bookingStatusFilter === 'pending'"
+                    [class.text-white]="bookingStatusFilter === 'pending'"
+                    [class.bg-white]="bookingStatusFilter !== 'pending'"
+                    [class.text-gray-600]="bookingStatusFilter !== 'pending'"
+                    class="px-4 py-2 rounded-xl text-sm font-bold shadow-sm transition-all border border-gray-100 hover:shadow-md">
+                    Pending
+                </button>
+                <button (click)="setBookingFilter('rejected')" [class.bg-red-600]="bookingStatusFilter === 'rejected'"
+                    [class.text-white]="bookingStatusFilter === 'rejected'"
+                    [class.bg-white]="bookingStatusFilter !== 'rejected'"
+                    [class.text-gray-600]="bookingStatusFilter !== 'rejected'"
+                    class="px-4 py-2 rounded-xl text-sm font-bold shadow-sm transition-all border border-gray-100 hover:shadow-md">
+                    Rejected
+                </button>
+                <button (click)="setBookingFilter('options')" [class.bg-indigo-600]="bookingStatusFilter === 'options'"
+                    [class.text-white]="bookingStatusFilter === 'options'"
+                    [class.bg-white]="bookingStatusFilter !== 'options'"
+                    [class.text-gray-600]="bookingStatusFilter !== 'options'"
+                    class="px-4 py-2 rounded-xl text-sm font-bold shadow-sm transition-all border border-gray-100 hover:shadow-md flex items-center">
+                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Options
+                </button>
+            </div>
+
+            @if (bookingStatusFilter !== 'options') {
+            <div
+                class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto animate-in fade-in slide-in-from-bottom-2 duration-300">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                User</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Unit Requested</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status</th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @for (booking of filteredBookings; track booking.id) {
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{
+                                booking.user_email }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Unit {{ booking.unit_number }} ({{ booking.tower_name }})
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ booking.booking_date | date
+                                }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                <span [class.bg-green-100]="booking.status === 'approved'"
+                                    [class.text-green-800]="booking.status === 'approved'"
+                                    [class.bg-yellow-100]="booking.status === 'pending'"
+                                    [class.text-yellow-800]="booking.status === 'pending'"
+                                    [class.bg-red-100]="booking.status === 'rejected'"
+                                    [class.text-red-800]="booking.status === 'rejected'"
+                                    class="px-2.5 py-0.5 rounded-full text-xs font-medium uppercase tracking-wide">
+                                    {{ booking.status }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                                @if(booking.status === 'pending') {
+                                <button (click)="approveBooking(booking.id)"
+                                    class="text-green-600 hover:text-green-900 font-bold">Approve</button>
+                                <button (click)="rejectBooking(booking.id)"
+                                    class="text-red-600 hover:text-red-900 font-bold">Reject</button>
+                                } @else {
+                                <span class="text-gray-400 italic">Resolved</span>
+                                }
+                            </td>
+                        </tr>
+                        }
+                        @if (filteredBookings.length === 0) {
+                        <tr>
+                            <td colspan="5" class="px-6 py-8 text-center text-sm text-gray-500">No booking requests
+                                found for this status.</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            }
+
+            @if (bookingStatusFilter === 'options') {
+            <div class="space-y-6 animate-in fade-in zoom-in duration-300">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div
+                        class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                        <div
+                            class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Export Data</h3>
+                        <p class="text-sm text-gray-500 mb-4">Download comprehensive booking reports in CSV or Excel
+                            format.</p>
+                        <button
+                            class="w-full bg-gray-50 text-gray-700 py-2 rounded-xl text-sm font-bold hover:bg-gray-100 transition-colors">Configure
+                            Export</button>
+                    </div>
+
+                    <div
+                        class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                        <div
+                            class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Notifications</h3>
+                        <p class="text-sm text-gray-500 mb-4">Manage automated email alerts for new booking requests.
+                        </p>
+                        <button
+                            class="w-full bg-gray-50 text-gray-700 py-2 rounded-xl text-sm font-bold hover:bg-gray-100 transition-colors">Notification
+                            Settings</button>
+                    </div>
+
+                    <div
+                        class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                        <div
+                            class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Auto-Approval</h3>
+                        <p class="text-sm text-gray-500 mb-4">Set rules for automatically approving trusted applicants.
+                        </p>
+                        <button
+                            class="w-full bg-gray-50 text-gray-700 py-2 rounded-xl text-sm font-bold hover:bg-gray-100 transition-colors">Manage
+                            Rules</button>
+                    </div>
+                </div>
+
+                <div class="bg-indigo-900 text-white p-8 rounded-3xl overflow-hidden relative">
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold mb-2">Booking Insights Pro</h3>
+                        <p class="text-indigo-200 max-w-lg mb-6">Unlock advanced analytics and prediction tools to
+                            optimize your occupancy rates and revenue.</p>
+                        <button
+                            class="bg-white text-indigo-900 px-6 py-3 rounded-xl font-bold hover:bg-indigo-50 transition-colors">Learn
+                            More</button>
+                    </div>
+                    <svg class="absolute right-0 bottom-0 w-64 h-64 text-indigo-800 opacity-50 transform translate-x-12 translate-y-12"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L11.414 13H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </div>
+            }
+        </div>
+        }
+
+        <!-- Tab: Maintenance -->
+        @if (activeTab === 'maintenance') {
+        <div>
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Maintenance Requests</h1>
+                    <p class="mt-1 text-sm text-gray-500">Track and resolve maintenance issues reported by users.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50 text-[10px] uppercase tracking-wider font-bold text-gray-500">
+                        <tr>
+                            <th class="px-4 py-3 text-left">ID</th>
+                            <th class="px-4 py-3 text-left">Reporter</th>
+                            <th class="px-4 py-3 text-left">Unit & Tower</th>
+                            <th class="px-4 py-3 text-left">Issue</th>
+                            <th class="px-4 py-3 text-left">Date</th>
+                            <th class="px-4 py-3 text-left">Service Date</th>
+                            <th class="px-4 py-3 text-left">Status</th>
+                            <th class="px-4 py-3 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200 text-sm">
+                        @for (req of maintenanceRequests; track req.id) {
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-4 py-4 whitespace-nowrap text-gray-400 font-mono">#{{ req.id }}</td>
+                            <td class="px-4 py-4 whitespace-nowrap">
+                                <div class="font-medium text-gray-900">{{ req.user_email }}</div>
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap">
+                                <div class="text-gray-900 font-bold">Unit {{ req.unit_number }}</div>
+                                <div class="text-[10px] text-gray-400 font-medium">{{ req.tower_name }}</div>
+                            </td>
+                            <td class="px-4 py-4">
+                                <div
+                                    class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-700 mb-1 border border-indigo-100">
+                                    {{ req.issue_type }}
+                                </div>
+                                <div class="text-gray-600 max-w-xs truncate" [title]="req.issue">{{ req.issue }}</div>
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap text-gray-500">
+                                {{ req.created_at | date:'shortDate':'UTC' }}
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap">
+                                @if (req.service_date) {
+                                <div class="text-indigo-600 font-bold text-xs">{{ req.service_date | date:'medium':'UTC'
+                                    }}
+                                </div>
+                                } @else {
+                                <span class="text-gray-300 italic text-xs">Not scheduled</span>
+                                }
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap text-[10px]">
+                                <span [class.bg-yellow-100]="req.status === 'pending'"
+                                    [class.text-yellow-800]="req.status === 'pending'"
+                                    [class.border-yellow-200]="req.status === 'pending'"
+                                    [class.bg-green-100]="req.status === 'resolved'"
+                                    [class.text-green-800]="req.status === 'resolved'"
+                                    [class.border-green-200]="req.status === 'resolved'"
+                                    class="px-2 py-0.5 rounded-full font-black uppercase tracking-widest border">
+                                    {{ req.status }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap text-right">
+                                <div class="flex flex-col gap-2 items-end">
+                                    @if (req.status === 'pending') {
+                                    <div
+                                        class="flex flex-col gap-1.5 p-2 bg-indigo-50/50 rounded-lg border border-indigo-100">
+                                        <div class="flex items-center gap-2">
+                                            <input type="datetime-local" [(ngModel)]="serviceDateForm[req.id]"
+                                                class="px-2 py-1 rounded text-[10px] border border-indigo-200 focus:ring-1 focus:ring-indigo-500 outline-none">
+                                        </div>
+                                        <textarea [(ngModel)]="adminNoteForm[req.id]"
+                                            [placeholder]="req.admin_note || 'Resolution notes...'"
+                                            class="w-full px-2 py-1 rounded text-[10px] border border-indigo-200 focus:ring-1 focus:ring-indigo-500 outline-none h-10 resize-none"></textarea>
+                                        <button (click)="assignServiceDate(req.id)"
+                                            class="w-full bg-indigo-600 text-white px-2 py-1 rounded text-[10px] font-bold hover:bg-indigo-700 transition-colors">
+                                            Schedule & Save Note
+                                        </button>
+                                    </div>
+                                    <button (click)="updateMaintenanceStatus(req.id, 'resolved')"
+                                        class="text-green-600 hover:text-green-900 font-bold text-xs mt-1 hover:underline">
+                                        ✔ Mark Resolved
+                                    </button>
+                                    } @else if (req.status === 'resolved') {
+                                    <div class="text-[10px] text-gray-500 italic max-w-[150px] truncate text-right mb-1"
+                                        [title]="req.admin_note">
+                                        Res: {{ req.admin_note || 'No resolution note' }}
+                                    </div>
+                                    @if (req.rating) {
+                                    <div
+                                        class="p-1.5 bg-yellow-50 rounded-lg border border-yellow-100 flex flex-col gap-0.5 items-end">
+                                        <div class="flex items-center gap-1">
+                                            <span class="text-[9px] font-bold text-gray-700">User: {{ req.rating
+                                                }}/5</span>
+                                            <svg class="h-2.5 w-2.5 text-yellow-500" fill="currentColor"
+                                                viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <div class="text-[8px] text-gray-600 text-right italic leading-tight">"{{
+                                            req.user_feedback }}"</div>
+                                    </div>
+                                    }
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                        @if (maintenanceRequests.length === 0) {
+                        <tr>
+                            <td colspan="8" class="px-6 py-12 text-center text-sm text-gray-500">
+                                <svg class="w-12 h-12 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5">
+                                    </path>
+                                </svg>
+                                No maintenance requests found. Great job!
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        }
+
+        }
+    </main>
+</div>

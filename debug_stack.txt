@@ -1,0 +1,66 @@
+PUSH: @if (errorMessage) { at 87
+POP : @if (errorMessage) { at 87 (due to } at 103)
+PUSH: @if (isLoading) { at 106
+POP : @if (isLoading) { at 106 (due to } @else {)
+PUSH: } @else { at 118
+PUSH: @if (flats.length === 0 && !errorMessage) { at 121
+POP : @if (flats.length === 0 && !errorMessage) { at 121 (due to } @else if (flats.length > 0) {)
+PUSH: } @else if (flats.length > 0) { at 137
+PUSH: @for (flat of flats; track flat.id) { at 141
+PUSH: @if (flat.image_url) { at 145
+POP : @if (flat.image_url) { at 145 (due to } @else {)
+PUSH: } @else { at 148
+POP : } @else { at 148 (due to } at 157)
+PUSH: @if (authService.currentUser$ | async; as user) { at 202
+PUSH: @if (user.role === 'user') { at 203
+POP : @if (user.role === 'user') { at 203 (due to } at 208)
+POP : @if (authService.currentUser$ | async; as user) { at 202 (due to } @else {)
+PUSH: } @else { at 209
+POP : } @else { at 209 (due to } at 214)
+POP : @for (flat of flats; track flat.id) { at 141 (due to } at 219)
+PUSH: @if (totalPages > 1) { at 223
+PUSH: @for (page of getPageArray(); track page) { at 237
+POP : @for (page of getPageArray(); track page) { at 237 (due to } at 245)
+POP : @if (totalPages > 1) { at 223 (due to } at 259)
+POP : } @else if (flats.length > 0) { at 137 (due to } at 260)
+POP : } @else { at 118 (due to } at 261)
+PUSH: @if (selectedFlat) { at 267
+PUSH: @if (selectedFlat.image_url) { at 275
+POP : @if (selectedFlat.image_url) { at 275 (due to } @else {)
+PUSH: } @else { at 278
+POP : } @else { at 278 (due to } at 287)
+PUSH: @if (selectedFlat.amenities && selectedFlat.amenities.length > 0) { at 357
+PUSH: @for (amt of selectedFlat.amenities; track amt) { at 362
+POP : @for (amt of selectedFlat.amenities; track amt) { at 362 (due to } at 367)
+POP : @if (selectedFlat.amenities && selectedFlat.amenities.length > 0) { at 357 (due to } at 370)
+PUSH: @if (reviews.length === 0) { at 379
+POP : @if (reviews.length === 0) { at 379 (due to } @else {)
+PUSH: } @else { at 383
+PUSH: @for (review of reviews; track review.id) { at 385
+PUSH: @for (star of [1, 2, 3, 4, 5]; track star) { at 393
+POP : @for (star of [1, 2, 3, 4, 5]; track star) { at 393 (due to } at 401)
+PUSH: @if (review.comment) { at 404
+POP : @if (review.comment) { at 404 (due to } at 406)
+POP : @for (review of reviews; track review.id) { at 385 (due to } at 408)
+POP : } @else { at 383 (due to } at 410)
+PUSH: @if (authService.currentUser$ | async; as user) { at 413
+PUSH: @if (user.role === 'user') { at 414
+PUSH: @for (star of [1, 2, 3, 4, 5]; track star) { at 421
+POP : @for (star of [1, 2, 3, 4, 5]; track star) { at 421 (due to } at 433)
+PUSH: @if (reviewError) { at 444
+POP : @if (reviewError) { at 444 (due to } at 446)
+POP : @if (user.role === 'user') { at 414 (due to } at 454)
+POP : @if (authService.currentUser$ | async; as user) { at 413 (due to } at 455)
+PUSH: @if (authService.currentUser$ | async; as user) { at 462
+PUSH: @if (user.role === 'user') { at 463
+PUSH: @if (!isBookingConfirmed) { at 465
+POP : @if (!isBookingConfirmed) { at 465 (due to } @else {)
+PUSH: } @else { at 474
+POP : } @else { at 474 (due to } at 491)
+POP : @if (user.role === 'user') { at 463 (due to } at 493)
+POP : @if (authService.currentUser$ | async; as user) { at 462 (due to } @else {)
+PUSH: } @else { at 494
+POP : } @else { at 494 (due to } at 499)
+PUSH: @if (!isBookingConfirmed) { at 501
+POP : @if (!isBookingConfirmed) { at 501 (due to } at 506)
+POP : @if (selectedFlat) { at 267 (due to } at 511)
