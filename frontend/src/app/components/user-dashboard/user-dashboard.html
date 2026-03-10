@@ -1,0 +1,1268 @@
+<div class="min-h-[calc(100vh-4rem)] bg-gray-50 flex flex-col md:flex-row">
+
+    <!-- Sidebar Navigation -->
+    <aside [class.w-16]="isSidebarCollapsed" [class.w-64]="!isSidebarCollapsed"
+        class="bg-white border-r border-gray-200 flex-shrink-0 transition-all duration-300 overflow-hidden">
+        <div class="p-6">
+            <h2
+                class="text-xl font-bold text-gray-900 border-b border-gray-100 pb-4 mb-4 flex justify-between items-center whitespace-nowrap">
+                <span [class.hidden]="isSidebarCollapsed">My Account</span>
+                <button (click)="toggleSidebar()" class="p-1 rounded-lg hover:bg-gray-100 transition-colors">
+                    <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </h2>
+            <nav class="space-y-2">
+                <button (click)="setTab('bookings')" [class.bg-indigo-50]="activeTab === 'bookings'"
+                    [class.text-indigo-700]="activeTab === 'bookings'" [class.text-gray-700]="activeTab === 'bookings'"
+                    class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium hover:bg-gray-50 hover:text-indigo-600 transition-colors flex items-center">
+                    <svg class="mr-3 h-5 w-5" [class.text-indigo-500]="activeTab === 'bookings'"
+                        [class.text-gray-400]="activeTab !== 'bookings'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7m-9-8v8m-4 4h14" />
+                    </svg>
+                    <span [class.hidden]="isSidebarCollapsed">My Bookings</span>
+                </button>
+                <button (click)="setTab('amenities')" [class.bg-indigo-50]="activeTab === 'amenities'"
+                    [class.text-indigo-700]="activeTab === 'amenities'"
+                    [class.text-gray-700]="activeTab !== 'amenities'"
+                    class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium hover:bg-gray-50 hover:text-indigo-600 transition-colors flex items-center">
+                    <svg class="mr-3 h-5 w-5" [class.text-indigo-500]="activeTab === 'amenities'"
+                        [class.text-gray-400]="activeTab !== 'amenities'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    <span [class.hidden]="isSidebarCollapsed">Tower Amenities</span>
+                </button>
+                <button (click)="setTab('lease')" [class.bg-indigo-50]="activeTab === 'lease'"
+                    [class.text-indigo-700]="activeTab === 'lease'" [class.text-gray-700]="activeTab !== 'lease'"
+                    class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium hover:bg-gray-50 hover:text-indigo-600 transition-colors flex items-center">
+                    <svg class="mr-3 h-5 w-5" [class.text-indigo-500]="activeTab === 'lease'"
+                        [class.text-gray-400]="activeTab !== 'lease'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span [class.hidden]="isSidebarCollapsed">Lease Agreement</span>
+                </button>
+                <button (click)="setTab('maintenance')" [class.bg-indigo-50]="activeTab === 'maintenance'"
+                    [class.text-indigo-700]="activeTab === 'maintenance'"
+                    [class.text-gray-700]="activeTab !== 'maintenance'"
+                    class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium hover:bg-gray-50 hover:text-indigo-600 transition-colors flex items-center">
+                    <svg class="mr-3 h-5 w-5" [class.text-indigo-500]="activeTab === 'maintenance'"
+                        [class.text-gray-400]="activeTab !== 'maintenance'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                    </svg>
+                    <span [class.hidden]="isSidebarCollapsed">Maintenance</span>
+                </button>
+                <button (click)="setTab('payments')" [class.bg-indigo-50]="activeTab === 'payments'"
+                    [class.text-indigo-700]="activeTab === 'payments'" [class.text-gray-700]="activeTab !== 'payments'"
+                    class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium hover:bg-gray-50 hover:text-indigo-600 transition-colors flex items-center">
+                    <svg class="mr-3 h-5 w-5" [class.text-indigo-500]="activeTab === 'payments'"
+                        [class.text-gray-400]="activeTab !== 'payments'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span [class.hidden]="isSidebarCollapsed">Payment History</span>
+                </button>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-6 md:p-8 overflow-y-auto">
+        <div class="mb-8 flex justify-between items-end">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                    {{ activeTab === 'bookings' ? 'My Bookings' : activeTab === 'payments' ? 'Payment History' :
+                    activeTab === 'lease' ? 'Lease Agreement' : activeTab === 'maintenance' ? 'Maintenance Requests' :
+                    'Tower Amenities' }}
+
+                    @if (activeTab === 'bookings' && hasUnpaidRent) {
+                    <span
+                        class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full bg-orange-50 border border-orange-200 text-xs font-bold text-orange-700 animate-pulse-slow">
+                        <span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                        This month payment is enabled, {{ daysRemainingInMonth }} days is remaining. Pay this month rent
+                        (Last {{ daysRemainingInMonth }} days remaining)
+                    </span>
+                    }
+                </h1>
+                <p class="mt-1 text-sm text-gray-500">
+                    {{ activeTab === 'bookings' ? 'Track and manage your apartment booking requests.' :
+                    activeTab === 'payments' ? 'View your past payments.' :
+                    activeTab === 'lease' ? 'View and download your active lease agreements.' :
+                    activeTab === 'maintenance' ? 'Submit and track property maintenance requests.' :
+                    'Check the operational status of facilities in your building.' }}
+                </p>
+            </div>
+
+
+
+            @if (activeTab === 'payments') {
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <select [(ngModel)]="paymentPeriod"
+                        class="bg-white border border-gray-200 rounded-xl px-4 py-2 text-sm font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none pr-10 cursor-pointer shadow-sm">
+                        <option value="all">All Transactions</option>
+                        <option value="this-month">This Month</option>
+                        <option value="last-month">Last Month</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
+                <button (click)="toggleMakePaymentForm()"
+                    class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-indigo-700 transition-all flex items-center gap-2 shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Make Payment
+                </button>
+            </div>
+            }
+
+            @if (activeTab === 'maintenance') {
+            <button (click)="toggleMaintenanceForm()"
+                class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-indigo-700 transition-all flex items-center gap-2 shadow-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                {{ showMaintenanceForm ? 'Cancel Request' : 'New Request' }}
+            </button>
+            }
+        </div>
+
+        @if (actionMessage) {
+        <div class="bg-green-50 p-4 rounded-xl mb-6 flex items-start">
+            <svg class="h-5 w-5 text-green-400 mt-0.5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <p class="text-sm font-medium text-green-800">{{ actionMessage }}</p>
+        </div>
+        }
+
+        <!-- Service Suspension Alerts (Only in Bookings Tab) -->
+        @if (activeTab === 'bookings') {
+        @for (alert of towerAlerts; track alert.towerName) {
+        <div class="mb-8 bg-red-50/50 border border-red-200 rounded-3xl p-6 shadow-sm">
+            <div class="flex items-start gap-5">
+                <div class="bg-red-100 p-3.5 rounded-2xl">
+                    <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-xl font-bold text-red-900 mb-2">Service Suspension Alert: {{ alert.towerName }}
+                    </h2>
+                    <p class="text-sm text-red-700 leading-relaxed font-medium mb-4">
+                        {{ alert.reason }}
+                    </p>
+                    <div class="flex items-center gap-3 py-2 px-4 bg-red-100/50 rounded-xl w-fit">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
+                        </span>
+                        <span class="text-xs font-bold text-red-600 uppercase tracking-[0.05em]">Action Required:
+                            Please contact management for further details.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+        }
+
+        <!-- Recommendations Section -->
+        @if (recommendations.length > 0 && activeTab === 'bookings') {
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-bold text-gray-900 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z">
+                        </path>
+                    </svg>
+                    Recommended for You
+                </h2>
+                <span class="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-1 rounded-md">{{ recommendationReason
+                    }}</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @for (flat of recommendations.slice(0,3); track flat.id) {
+                <div class="bg-white border text-center border-gray-100 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                    routerLink="/flats">
+                    <div class="h-32 bg-gray-100 rounded-xl mb-4 overflow-hidden relative">
+                        @if(flat.image_url) {
+                        <img [src]="flat.image_url" class="object-cover w-full h-full" alt="Flat image">
+                        } @else {
+                        <div class="w-full h-full flex justify-center items-center text-gray-400">No Image</div>
+                        }
+                    </div>
+                    <h3 class="font-bold text-gray-900">Unit {{ flat.unit_number }}</h3>
+                    <p class="text-xl font-black text-indigo-600 my-1">₹{{ flat.price }} <span
+                            class="text-xs text-gray-400 font-normal">/mo</span></p>
+                    <p class="text-sm text-gray-500">{{ flat.bhk }} BHK • Floor {{ flat.floor || 'N/A' }} • {{
+                        flat.tower_name }}</p>
+                </div>
+                }
+            </div>
+        </div>
+        }
+
+        @if (isLoading) {
+        <div class="flex justify-center items-center h-64">
+            <svg class="animate-spin h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                </path>
+            </svg>
+        </div>
+        } @else {
+
+        @if (errorMessage) {
+        <div class="bg-red-50 p-4 rounded-xl mb-6 flex items-start">
+            <svg class="h-5 w-5 text-red-400 mt-0.5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <p class="text-sm text-red-700">{{ errorMessage }}</p>
+        </div>
+        }
+
+        @if (activeTab === 'bookings') {
+        <!-- Tabs for Booking Filter -->
+        <div class="flex space-x-2 mb-6 bg-gray-100 p-1 rounded-xl inline-flex">
+            <button (click)="bookingFilter = 'active'" [class.bg-white]="bookingFilter === 'active'"
+                [class.shadow-sm]="bookingFilter === 'active'" [class.text-indigo-600]="bookingFilter === 'active'"
+                [class.text-gray-600]="bookingFilter !== 'active'"
+                class="px-4 py-2 rounded-lg text-sm font-bold transition-all">
+                Active Bookings
+            </button>
+            <button (click)="bookingFilter = 'past'" [class.bg-white]="bookingFilter === 'past'"
+                [class.shadow-sm]="bookingFilter === 'past'" [class.text-indigo-600]="bookingFilter === 'past'"
+                [class.text-gray-600]="bookingFilter !== 'past'"
+                class="px-4 py-2 rounded-lg text-sm font-bold transition-all">
+                Past & Rejected
+            </button>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Property</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Details</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date
+                            Requested</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @for (booking of filteredBookings; track booking.id) {
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 relative">
+                                    @if(booking.image_url) {
+                                    <img class="h-10 w-10 rounded-lg object-cover" [src]="booking.image_url" alt="">
+                                    } @else {
+                                    <div class="h-10 w-10 rounded-lg bg-gray-200 flex items-center justify-center">
+                                        <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                        </svg>
+                                    </div>
+                                    }
+                                </div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-bold text-gray-900">Unit {{ booking.unit_number }} (Floor
+                                        {{ booking.floor || 'N/A' }})</div>
+                                    <div class="text-xs text-gray-500 font-medium">{{ booking.tower_name }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="space-y-1.5 flex flex-col justify-center">
+                                <div class="text-sm font-bold text-gray-900">
+                                    ₹{{ booking.price | number:'1.0-0' }} / mon
+                                </div>
+                                <div class="text-sm text-gray-700 font-bold">
+                                    {{ booking.bhk }} BHK
+                                </div>
+                                @if (booking.security_deposit) {
+                                <div class="text-sm font-bold text-gray-900 pt-0.5">
+                                    ₹{{ booking.security_deposit | number:'1.0-0' }} / deposit
+                                </div>
+                                }
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {{ booking.booking_date | date:'mediumDate':'+0530' }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span [class.bg-yellow-100]="booking.status === 'pending'"
+                                [class.text-yellow-800]="booking.status === 'pending'"
+                                [class.bg-green-100]="booking.status === 'approved'"
+                                [class.text-green-800]="booking.status === 'approved'"
+                                [class.bg-red-100]="booking.status === 'rejected'"
+                                [class.text-red-800]="booking.status === 'rejected'"
+                                [class.bg-indigo-100]="booking.status === 'rented' || booking.status === 'vacated'"
+                                [class.text-indigo-800]="booking.status === 'rented' || booking.status === 'vacated'"
+                                class="px-2.5 py-1 inline-flex text-xs leading-5 font-bold rounded-full uppercase tracking-wide">
+                                {{ booking.status }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
+                            <div class="flex flex-col items-end gap-2">
+                                <div class="flex items-center gap-3">
+                                    @if(booking.status === 'approved') {
+                                    <div class="flex flex-col items-end gap-1">
+                                        <div class="flex items-center gap-2">
+                                            @if (paymentTimers[booking.id] !== undefined && !paymentExpired[booking.id])
+                                            {
+                                            <span
+                                                class="text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-100 flex items-center gap-1 animate-pulse">
+                                                <svg class="w-3 h-3" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                Pay within {{ formatTimer(paymentTimers[booking.id]) }}
+                                            </span>
+                                            } @else if (paymentExpired[booking.id]) {
+                                            <span
+                                                class="text-[10px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-100 flex items-center gap-1">
+                                                <svg class="w-3 h-3" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                Expired
+                                            </span>
+                                            }
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <button type="button" (click)="initiatePaymentFlow(booking.id)"
+                                                [disabled]="paymentExpired[booking.id]" id="pay-now-btn-{{booking.id}}"
+                                                [class.opacity-50]="paymentExpired[booking.id]"
+                                                [class.cursor-not-allowed]="paymentExpired[booking.id]"
+                                                class="text-indigo-600 hover:text-indigo-900 font-bold bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-100 transition-colors disabled:bg-gray-50 disabled:text-gray-400 disabled:border-gray-100">Pay
+                                                Now</button>
+                                            <button (click)="downloadLease(booking.id)"
+                                                class="text-gray-600 hover:text-gray-900 font-medium px-3 py-1.5">📄
+                                                Lease
+                                                PDF</button>
+                                        </div>
+                                    </div>
+                                    } @else if(booking.status === 'rented') {
+                                    <span
+                                        class="text-green-600 font-bold flex items-center pr-2 border-r border-gray-200"><svg
+                                            class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7"></path>
+                                        </svg> Active Lease</span>
+                                    <button (click)="downloadLease(booking.id)"
+                                        class="text-gray-600 hover:text-gray-900 font-medium px-3 py-1.5">📄 Lease
+                                        PDF</button>
+                                    } @else {
+                                    <span class="text-gray-400 italic">No actions</span>
+                                    }
+                                </div>
+
+                                @if(booking.status === 'approved' || booking.status === 'rented') {
+                                @if(hasPendingRequest(booking.id, 'vacate')) {
+                                <span
+                                    class="inline-flex items-center text-xs font-bold bg-yellow-100 text-yellow-800 px-2.5 py-1 rounded-md border border-yellow-200">
+                                    <svg class="w-3 h-3 mr-1 animate-spin" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                            stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor"
+                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                        </path>
+                                    </svg>
+                                    Vacate Request Pending
+                                </span>
+                                } @else {
+                                <button (click)="toggleVacateForm(booking.id)"
+                                    class="text-rose-600 hover:text-rose-900 font-bold bg-rose-50 px-3 py-1.5 rounded-md border border-rose-100 transition-colors">
+                                    Request Vacate
+                                </button>
+                                }
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Vacate Form -->
+                    @if (vacateForm[booking.id] !== undefined) {
+                    <tr class="bg-rose-50/30">
+                        <td colspan="5" class="px-6 py-4">
+                            <div
+                                class="flex items-center justify-end gap-3 bg-white p-3 rounded-xl border border-rose-100 shadow-sm animate-in fade-in zoom-in-95 duration-200">
+                                <span class="text-sm font-bold text-rose-800 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                        </path>
+                                    </svg>
+                                    Vacate Date:
+                                </span>
+                                <input type="date" [(ngModel)]="vacateForm[booking.id]"
+                                    class="px-3 py-2 rounded-lg border border-rose-200 text-sm font-medium focus:ring-2 focus:ring-rose-400 focus:outline-none" />
+                                <div class="flex-1 min-w-[200px]">
+                                    <textarea [(ngModel)]="vacateReason[booking.id]"
+                                        placeholder="Reason for vacating (e.g. moving to a new city...)"
+                                        class="w-full px-3 py-2 rounded-lg border border-rose-200 text-sm focus:ring-2 focus:ring-rose-400 focus:outline-none resize-none"
+                                        rows="1"></textarea>
+                                    <p class="text-[10px] text-rose-600 mt-1 italic font-medium">Please provide a clear
+                                        reason to help the administrator review and approve your request efficiently.
+                                    </p>
+                                </div>
+                                <button (click)="submitVacateRequest(booking.id)"
+                                    [disabled]="isSubmittingVacate || !vacateForm[booking.id]"
+                                    class="bg-rose-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-rose-700 transition-colors disabled:opacity-50 inline-flex items-center">
+                                    {{ isSubmittingVacate ? 'Submitting...' : 'Confirm Request' }}
+                                </button>
+                                <button (click)="toggleVacateForm(booking.id)"
+                                    class="text-gray-500 hover:text-gray-800 text-sm font-medium px-2">Cancel</button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                    }
+                    @if (filteredBookings.length === 0) {
+                    <tr>
+                        <td colspan="5" class="px-6 py-8 text-center text-sm text-gray-500">
+                            No {{ bookingFilter }} bookings found.
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+
+
+        }
+
+        <!-- Payment History Tab -->
+        @if (activeTab === 'payments') {
+
+        <!-- Professional Make Payment / Invoicing UI -->
+        @if (showMakePaymentForm) {
+        <div
+            class="bg-indigo-50/50 backdrop-blur-sm rounded-3xl p-8 mb-8 border border-white shadow-xl shadow-indigo-100/50 animate-in fade-in zoom-in duration-500">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Left: Line Items -->
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-4">
+                            <h3 class="text-lg font-black text-indigo-900 tracking-tight">Outstanding Statements</h3>
+                            <select [(ngModel)]="selectedPaymentBookingId"
+                                class="text-sm border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-1 pl-3 pr-8">
+                                <option value="all">All Units</option>
+                                @for (booking of filteredBookings; track booking.id) {
+                                <option [value]="booking.id">Unit {{ booking.unit_number }} (Floor {{ booking.floor }},
+                                    {{ booking.tower_name }})</option>
+                                }
+                            </select>
+                        </div>
+                        <span class="bg-indigo-100 text-indigo-700 text-[10px] font-bold uppercase px-2 py-1 rounded">
+                            Action Required
+                        </span>
+                    </div>
+
+                    <div class="space-y-3">
+                        @for (due of getFilteredDuesWithIndex(); track due.originalIndex) {
+                        <div (click)="toggleDueSelection(due.originalIndex)"
+                            [class.border-indigo-400]="selectedDuesIndices.has(due.originalIndex)"
+                            [class.bg-white]="selectedDuesIndices.has(due.originalIndex)"
+                            [class.shadow-md]="selectedDuesIndices.has(due.originalIndex)"
+                            [class.opacity-50]="!isDueSelectable(due.originalIndex)"
+                            [class.cursor-not-allowed]="!isDueSelectable(due.originalIndex)"
+                            class="group border-2 border-transparent bg-white/40 p-4 rounded-2xl cursor-pointer transition-all hover:bg-white hover:border-indigo-200">
+                            <div class="flex items-center gap-4">
+                                <div [class.bg-indigo-600]="selectedDuesIndices.has(due.originalIndex)"
+                                    [class.border-gray-200]="!selectedDuesIndices.has(due.originalIndex)"
+                                    class="w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-colors">
+                                    @if (selectedDuesIndices.has(due.originalIndex)) {
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    }
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="font-bold text-gray-900">{{ due.type }}</p>
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{{
+                                            due.period }}</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-black text-gray-900">₹{{ due.amount | number }}</p>
+                                        @if (due.penalty > 0) {
+                                        <p class="text-[10px] items-center gap-0.5 text-red-500 font-bold inline-flex">
+                                            <svg class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" />
+                                            </svg>
+                                            Incl. 10% Late Fee
+                                        </p>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="mt-2 flex items-center gap-2 text-xs text-gray-500 font-medium">
+                                    <svg class="w-3 h-3 text-indigo-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                    </svg>
+                                    {{ due.unit_info }}
+                                </div>
+                            </div>
+                        </div>
+                        }
+                        @if (outstandingDues.length === 0) {
+                        <div class="py-12 text-center">
+                            <div
+                                class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-indigo-100">
+                                <svg class="w-8 h-8 text-indigo-300" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <p class="text-sm font-bold text-gray-500">No outstanding dues for this unit.</p>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Right: Summary Card -->
+                <div class="w-full lg:w-80">
+                    <div class="bg-indigo-600 rounded-2xl p-6 text-white shadow-xl shadow-indigo-200">
+                        <p class="text-[10px] font-bold text-indigo-200 uppercase tracking-widest mb-4">Payment Summary
+                        </p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-xs font-medium">
+                                <span class="text-indigo-100">Selected Items</span>
+                                <span>{{ selectedDuesIndices.size }}</span>
+                            </div>
+                            <div class="flex justify-between pb-3 border-b border-indigo-500/50">
+                                <span class="text-indigo-100 text-xs">Processing Fee</span>
+                                <span class="text-xs font-bold text-indigo-100">₹0.00</span>
+                            </div>
+                            <div class="flex justify-between items-end pt-2">
+                                <span class="text-xs text-indigo-100 font-medium">Total Amount</span>
+                                <span class="text-3xl font-black">₹{{ totalDuesAmount | number }}</span>
+                            </div>
+                        </div>
+
+                        <button (click)="processDirectPayment()"
+                            [disabled]="isProcessingDirectPayment || selectedDuesIndices.size === 0"
+                            class="w-full bg-white text-indigo-700 py-4 rounded-xl text-sm font-black hover:bg-indigo-50 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed">
+                            {{ isProcessingDirectPayment ? 'Securing Transaction...' : 'Pay with Secured Gateway' }}
+                            @if (!isProcessingDirectPayment) {
+                            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                            }
+                        </button>
+
+                        <div class="mt-4 flex items-center justify-center gap-2 grayscale opacity-50">
+                            <svg class="w-10 h-6" viewBox="0 0 46 29">
+                                <path fill="#FFF"
+                                    d="M18.3 19.3l2.8-17.6h4.6l-2.8 17.6h-4.6zm18.3-17.2c-1.1-.4-2.8-.8-4.9-.8-5.4 0-9.2 2.8-9.2 6.8 0 3 2.7 4.6 4.8 5.6 2.1 1 2.8 1.7 2.8 2.6 0 1.4-1.7 2-3.3 2-2.2 0-3.5-.3-5.3-1.1l-.7-.4-.8 4.9c1.4.6 3.9 1.2 6.5 1.2 5.7 0 9.4-2.8 9.4-7.1 0-2.4-1.4-4.2-4.6-5.7-2.1-1.1-3.4-1.8-3.4-2.9 0-1 .1-2.1 3.2-2.1 1.9 0 3.2.4 4.3.8l.5.2.7-4.1zm11.9.4h-3.5c-1.1 0-1.9.3-2.4 1.5l-8.2 19.3h4.8l1 2.7h5.8l.5-2.7h4.3l-2.3-20.8zM4.3 1.7L0 19.3h4.6L8.9 1.7H4.3z" />
+                            </svg>
+                            <svg class="w-10 h-6" viewBox="0 0 38 24">
+                                <path fill="#FFF" d="M23 24H15V0h8v24zM8 24H0V0h8v24zM38 24h-8V0h8v24z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Transaction ID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unit
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Amount</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @for (payment of filteredPayments; track payment.id) {
+                    <tr [class.bg-orange-50/30]="payment.status === 'pending'"
+                        [class.bg-red-50/30]="payment.status === 'failed'" class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-mono">
+                            {{ payment.status === 'pending' ? '---' : 'TXN-' + (payment.id | number:'3.0') }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
+                            Unit {{ payment.unit_number }} (Floor {{ payment.floor || 'N/A' }})<br>
+                            <span class="text-xs text-gray-500 font-medium">{{ payment.tower_name }}</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {{ payment.status === 'pending' ? 'Due Since ' + (payment.payment_date | date:'MMM d') :
+                            (payment.payment_date | date:'medium':'+0530') }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">₹{{ payment.amount |
+                            number:'1.2-2' }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right">
+                            @if (payment.status === 'paid' || payment.status === 'completed') {
+                            <span
+                                class="bg-green-100 text-green-800 px-2.5 py-1 inline-flex text-xs leading-5 font-bold rounded-full uppercase tracking-wide">
+                                PAID
+                            </span>
+                            } @else if (payment.status === 'failed' || payment.status === 'rejected') {
+                            <span
+                                class="bg-red-100 text-red-800 px-2.5 py-1 inline-flex text-xs leading-5 font-bold rounded-full uppercase tracking-wide">
+                                FAILED
+                            </span>
+                            } @else {
+                            <span
+                                class="bg-orange-100 text-orange-800 px-2.5 py-1 inline-flex text-xs leading-5 font-bold rounded-full uppercase tracking-wide animate-pulse">
+                                PENDING
+                            </span>
+                            }
+                        </td>
+                    </tr>
+                    }
+                    @if (filteredPayments.length === 0) {
+                    <tr>
+                        <td colspan="5" class="px-6 py-12 text-center text-sm text-gray-500">
+                            <svg class="mx-auto h-12 w-12 text-gray-300 mb-3" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z">
+                                </path>
+                            </svg>
+                            You have no payment history yet.
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+        @if (activeTab === 'lease') {
+        @if (leases.length === 0) {
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center">
+            <svg class="mx-auto h-16 w-16 text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <h3 class="text-lg font-semibold text-gray-700 mb-2">No Lease Agreements</h3>
+            <p class="text-sm text-gray-500">Your lease agreement will appear here once your booking is approved by the
+                admin.</p>
+            <button (click)="setTab('bookings')"
+                class="mt-6 bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 transition-colors">
+                View My Bookings
+            </button>
+        </div>
+        } @else {
+        <div class="space-y-6">
+            @for (lease of leases; track lease.booking_id) {
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+                <!-- Status banner -->
+                <div [class.bg-green-600]="lease.status === 'rented'"
+                    [class.bg-indigo-600]="lease.status === 'approved'"
+                    class="px-6 py-3 flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span class="text-white font-bold text-sm">LEASE AGREEMENT</span>
+                    </div>
+                    <span class="text-xs font-bold text-white uppercase bg-white/20 px-2.5 py-1 rounded-full">{{
+                        lease.status }}</span>
+                </div>
+
+                <!-- Lease Details Grid -->
+                <div class="p-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Unit</p>
+                        <p class="text-sm font-bold text-gray-900">Unit {{ lease.unit_number }} (Floor {{ lease.floor ||
+                            'N/A' }})</p>
+                        <p class="text-xs text-gray-500 font-medium">{{ lease.tower_name }}</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Monthly Rent</p>
+                        <p class="text-sm font-bold text-indigo-700">₹{{ lease.rent_amount | number:'1.0-0' }}</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Start Date</p>
+                        <p class="text-sm font-bold text-gray-900">
+                            {{ lease.start_date ? (lease.start_date | date:'mediumDate':'+0530') : 'TBD' }}
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">End Date</p>
+                        <p class="text-sm font-bold text-gray-900">
+                            {{ lease.end_date ? (lease.end_date | date:'mediumDate':'+0530') : 'TBD' }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Footer Actions -->
+                <div class="px-6 pb-6 border-t border-gray-100 pt-4 space-y-3">
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <p class="text-xs text-gray-400">Booking #{{ lease.booking_id }} · Requested {{
+                            lease.booking_date | date:'mediumDate':'+0530' }}</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <button (click)="downloadLease(lease.booking_id)"
+                                class="inline-flex items-center gap-1.5 bg-indigo-600 text-white px-3 py-2 rounded-xl text-xs font-semibold hover:bg-indigo-700 transition-all">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download PDF
+                            </button>
+                            @if (!hasPendingRequest(lease.booking_id, 'extend')) {
+                            <button (click)="toggleRequestForm(lease.booking_id, 'extend')"
+                                [class.bg-emerald-600]="showRequestForm[lease.booking_id] !== 'extend'"
+                                [class.bg-gray-400]="showRequestForm[lease.booking_id] === 'extend'"
+                                class="inline-flex items-center gap-1.5 text-white px-3 py-2 rounded-xl text-xs font-semibold hover:opacity-90 transition-all">
+                                🗓 {{ showRequestForm[lease.booking_id] === 'extend' ? 'Cancel' : 'Request Extension' }}
+                            </button>
+                            } @else {
+                            <span
+                                class="text-xs font-semibold bg-emerald-50 text-emerald-700 px-3 py-2 rounded-xl border border-emerald-200">⏳
+                                Extension Pending</span>
+                            }
+                            @if (!hasPendingRequest(lease.booking_id, 'terminate')) {
+                            <button (click)="toggleRequestForm(lease.booking_id, 'terminate')"
+                                [class.bg-red-500]="showRequestForm[lease.booking_id] !== 'terminate'"
+                                [class.bg-gray-400]="showRequestForm[lease.booking_id] === 'terminate'"
+                                class="inline-flex items-center gap-1.5 text-white px-3 py-2 rounded-xl text-xs font-semibold hover:opacity-90 transition-all">
+                                🚫 {{ showRequestForm[lease.booking_id] === 'terminate' ? 'Cancel' : 'Request
+                                Termination' }}
+                            </button>
+                            } @else {
+                            <span
+                                class="text-xs font-semibold bg-red-50 text-red-700 px-3 py-2 rounded-xl border border-red-200">⏳
+                                Termination Pending</span>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Extend Form -->
+                    @if (showRequestForm[lease.booking_id] === 'extend') {
+                    <div class="bg-emerald-50 rounded-xl p-5 border border-emerald-200 animate-in fade-in duration-200">
+                        <div class="flex items-start gap-4 flex-wrap mb-4">
+                            <!-- Helper text / Start point -->
+                            <div class="hidden sm:block">
+                                <span
+                                    class="text-xs uppercase tracking-wider font-bold text-emerald-600 block mb-1">Current
+                                    End Date</span>
+                                <div
+                                    class="bg-white/50 px-3 py-2 rounded-lg text-sm text-gray-500 font-medium tabular-nums cursor-not-allowed border border-emerald-100 placeholder-transparent">
+                                    {{ lease.end_date | date:'yyyy-MM-dd' }}
+                                </div>
+                            </div>
+                            <!-- Months & Days duration -->
+                            <div>
+                                <span
+                                    class="text-xs uppercase tracking-wider font-bold text-emerald-600 block mb-1">Duration</span>
+                                <div class="flex items-center gap-2">
+                                    <div class="relative">
+                                        <input type="number" [(ngModel)]="extendForm[lease.booking_id].months"
+                                            (ngModelChange)="recalculateExtension(lease.booking_id)" min="0" max="60"
+                                            placeholder="0"
+                                            class="w-16 px-2 py-2 rounded-lg border border-emerald-300 text-sm focus:ring-2 focus:ring-emerald-400 focus:outline-none text-center" />
+                                        <span class="text-xs font-semibold text-emerald-700 ml-1">mo</span>
+                                    </div>
+                                    <div class="relative">
+                                        <input type="number" [(ngModel)]="extendForm[lease.booking_id].days"
+                                            (ngModelChange)="recalculateExtension(lease.booking_id)" min="0" max="365"
+                                            placeholder="0"
+                                            class="w-16 px-2 py-2 rounded-lg border border-emerald-300 text-sm focus:ring-2 focus:ring-emerald-400 focus:outline-none text-center" />
+                                        <span class="text-xs font-semibold text-emerald-700 ml-1">days</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Date picker block -->
+                            <div class="flex-1 min-w-[200px]">
+                                <span class="text-xs uppercase tracking-wider font-bold text-emerald-800 block mb-1">New
+                                    End Date</span>
+                                <div class="flex gap-3 items-center">
+                                    <input type="date" [(ngModel)]="extendForm[lease.booking_id].newEndDate"
+                                        [min]="lease.end_date | date:'yyyy-MM-dd'"
+                                        class="flex-1 w-full px-3 py-2 rounded-lg border border-emerald-300 text-sm font-semibold focus:ring-2 focus:ring-emerald-400 focus:outline-none bg-white" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reason field -->
+                        <div class="mb-4 px-1">
+                            <span class="text-xs uppercase tracking-wider font-bold text-emerald-800 block mb-1">Reason
+                                for Extension</span>
+                            <textarea [(ngModel)]="requestReason[lease.booking_id]"
+                                placeholder="Why do you wish to extend the lease? (e.g. continuing job assignment...)"
+                                class="w-full px-4 py-2 rounded-xl border border-emerald-300 text-sm focus:ring-2 focus:ring-emerald-400 focus:outline-none resize-none bg-white"
+                                rows="2"></textarea>
+                            <p class="text-[10px] text-emerald-700 mt-1 italic font-medium">Please provide a clear
+                                reason to help the administrator review and approve your request efficiently.</p>
+                        </div>
+
+                        <!-- Submit request -->
+                        <div class="flex justify-end pt-3 border-t border-emerald-100">
+                            <button (click)="submitLeaseRequest(lease.booking_id, 'extend')"
+                                [disabled]="isSubmittingRequest"
+                                class="bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-emerald-700 transition-all disabled:opacity-50">
+                                {{ isSubmittingRequest ? 'Submitting...' : 'Submit Request' }}
+                            </button>
+                        </div>
+                    </div>
+                    }
+
+                    <!-- Terminate Form -->
+                    @if (showRequestForm[lease.booking_id] === 'terminate') {
+                    <div
+                        class="bg-red-50 rounded-xl p-4 border border-red-200 flex items-center gap-3 animate-in fade-in duration-200">
+                        <svg class="w-5 h-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        <div class="flex-1">
+                            <p class="text-sm text-red-700 font-medium whitespace-normal">This will request early lease
+                                termination.
+                                Admin will contact you to confirm.</p>
+                            <textarea [(ngModel)]="requestReason[lease.booking_id]"
+                                placeholder="Reason for termination (e.g. personal emergency...)"
+                                class="mt-2 w-full px-3 py-2 rounded-lg border border-red-200 text-sm focus:ring-2 focus:ring-red-400 focus:outline-none resize-none"
+                                rows="2"></textarea>
+                            <p class="text-[10px] text-red-600 mt-1 italic font-medium">Please provide a clear reason to
+                                help the administrator review and approve your request efficiently.</p>
+                        </div>
+                        <button (click)="submitLeaseRequest(lease.booking_id, 'terminate')"
+                            [disabled]="isSubmittingRequest"
+                            class="ml-auto bg-red-600 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-red-700 transition-all disabled:opacity-50">
+                            {{ isSubmittingRequest ? 'Submitting...' : 'Confirm Request' }}
+                        </button>
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+        }
+        }
+
+
+        <!-- Maintenance Tab -->
+        @if (activeTab === 'maintenance') {
+
+        @if (showMaintenanceForm) {
+        <!-- Submission Form -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Request New Maintenance</h3>
+            <form (submit)="submitMaintenance()">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Select Unit</label>
+                        <select [(ngModel)]="selectedMaintenanceBookingId" name="unit" required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors bg-white">
+                            <option [ngValue]="null" disabled selected>Select a unit...</option>
+                            @for (booking of filteredBookings; track booking.id) {
+                            <option [ngValue]="booking.id">Unit {{ booking.unit_number }} (Floor {{ booking.floor ||
+                                'N/A' }}) - {{ booking.tower_name }}
+                            </option>
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Issue Type</label>
+                        <select [(ngModel)]="newMaintenanceIssueType" name="issueType" required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors bg-white">
+                            <option value="" disabled selected>Select issue type...</option>
+                            <option value="Electricity">Electricity</option>
+                            <option value="Plumbing">Plumbing</option>
+                            <option value="Carpentry">Carpentry</option>
+                            <option value="Cleaning">Cleaning</option>
+                            <option value="Generic">Generic</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Describe the Issue</label>
+                    <textarea [(ngModel)]="newMaintenanceIssue" name="issue" rows="3" required
+                        class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors resize-none"
+                        placeholder="e.g., The kitchen sink is leaking..."></textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button type="submit"
+                        [disabled]="isSubmittingMaintenance || !newMaintenanceIssue.trim() || !newMaintenanceIssueType || !selectedMaintenanceBookingId"
+                        class="bg-indigo-600 text-white px-6 py-2.5 rounded-xl font-medium shadow-sm hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        {{ isSubmittingMaintenance ? 'Submitting...' : 'Submit Request' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+        }
+
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Your Maintenance Tickets</h3>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Ticket ID</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Unit & Tower</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Issue Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Description</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Submitted On</th>
+                        <th
+                            class="px-4 py-3 text-left text-xs font-medium text-indigo-500 uppercase tracking-wider font-bold">
+                            Service Date</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status</th>
+                        <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Review</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @for (req of maintenanceRequests; track req.id) {
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 font-mono">TKT-{{ req.id |
+                            number:'3.0' }}</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
+                            Unit {{ req.unit_number || 'N/A' }} (Floor {{ req.floor || 'N/A' }})<br>
+                            <span class="text-xs text-gray-500 font-medium">{{ req.tower_name || '-' }}</span>
+                        </td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-600 font-medium">
+                            {{ req.issue_type || 'Generic' }}
+                        </td>
+                        <td class="px-4 py-4 text-sm text-gray-700 max-w-xs truncate" title="{{ req.issue }}">{{
+                            req.issue }}</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{{ req.created_at |
+                            date:'mediumDate':'UTC' }}</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm font-semibold text-indigo-600">
+                            {{ req.service_date ? (req.service_date | date:'short':'+0530') : 'TBD' }}
+                        </td>
+                        <td class="px-4 py-4 whitespace-nowrap">
+                            <span [class.bg-yellow-100]="req.status === 'pending'"
+                                [class.text-yellow-800]="req.status === 'pending'"
+                                [class.bg-green-100]="req.status === 'resolved'"
+                                [class.text-green-800]="req.status === 'resolved'"
+                                class="px-2.5 py-1 inline-flex text-xs leading-5 font-bold rounded-full uppercase tracking-wide">
+                                {{ req.status }}
+                            </span>
+                        </td>
+                        <td class="px-4 py-4 text-right">
+                            <div class="flex flex-col items-end">
+                                @if (req.admin_note) {
+                                <div class="text-xs text-gray-500 mb-1 italic whitespace-normal break-words max-w-xs"
+                                    [title]="req.admin_note">
+                                    "{{ req.admin_note }}"
+                                </div>
+                                }
+
+                                @if (req.status === 'resolved') {
+                                @if (req.rating) {
+                                <div class="flex items-center space-x-1">
+                                    <span class="text-xs font-bold text-gray-700">{{ req.rating }}/5</span>
+                                    <svg class="h-3 w-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                } @else {
+                                <button (click)="toggleFeedbackForm(req.id)"
+                                    class="text-[10px] text-indigo-600 font-bold hover:underline">
+                                    Rate Service
+                                </button>
+                                }
+                                } @else {
+                                <span class="text-gray-300 text-[10px] italic">Awaiting Resolution</span>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Feedback Form Row -->
+                    @if (feedbackForm[req.id]) {
+                    <tr class="bg-indigo-50/30">
+                        <td colspan="8" class="px-6 py-4">
+                            <div class="bg-white p-4 rounded-xl border border-indigo-100 shadow-sm max-w-2xl mx-auto">
+                                <div class="flex justify-between items-center mb-3">
+                                    <h4 class="text-sm font-bold text-gray-900">Rate our service</h4>
+                                    <button (click)="toggleFeedbackForm(req.id)"
+                                        class="text-gray-400 hover:text-gray-600">
+                                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-center space-x-4">
+                                        <label class="text-xs font-medium text-gray-700">Rating:</label>
+                                        <div class="flex space-x-1">
+                                            @for (star of [1,2,3,4,5]; track star) {
+                                            <button (click)="feedbackForm[req.id].rating = star"
+                                                class="focus:outline-none">
+                                                <svg [class.text-yellow-400]="feedbackForm[req.id].rating >= star"
+                                                    [class.text-gray-300]="feedbackForm[req.id].rating < star"
+                                                    class="h-5 w-5 transition-colors" fill="currentColor"
+                                                    viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <textarea [(ngModel)]="feedbackForm[req.id].comment"
+                                            placeholder="What did you think of the service?"
+                                            class="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors resize-none"
+                                            rows="2"></textarea>
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <button (click)="submitMaintenanceFeedback(req.id)"
+                                            [disabled]="isSubmittingFeedback || !feedbackForm[req.id].comment.trim()"
+                                            class="bg-indigo-600 text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-indigo-700 transition-colors disabled:opacity-50">
+                                            {{ isSubmittingFeedback ? 'Submitting...' : 'Submit Feedback' }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                    }
+                    @if (maintenanceRequests.length === 0) {
+                    <tr>
+                        <td colspan="8" class="px-6 py-12 text-center text-sm text-gray-500">
+                            <svg class="mx-auto h-12 w-12 text-gray-300 mb-3" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z">
+                                </path>
+                            </svg>
+                            You have no maintenance requests.
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+        @if (activeTab === 'amenities') {
+        <div class="animate-in fade-in slide-in-from-bottom-2 duration-300">
+            @if (towerAmenityStatuses.length > 0) {
+            @for (tower of towerAmenityStatuses; track tower.tower_id) {
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-8">
+                <div class="bg-gray-50/50 px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-gray-900 text-lg">{{ tower.tower_name }}</h3>
+                    </div>
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Building Inventory</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-100">
+                        <thead class="bg-white">
+                            <tr>
+                                <th
+                                    class="px-6 py-4 text-left text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                    Facility Name</th>
+                                <th
+                                    class="px-6 py-4 text-left text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                    Operational Status</th>
+                                <th
+                                    class="px-6 py-4 text-right text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                    Last Checkup</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-50">
+                            @for (stat of tower.amenities; track stat.amenity_id) {
+                            <tr class="hover:bg-gray-50/50 transition-colors">
+                                <td class="px-6 py-5">
+                                    <div class="font-bold text-gray-900">{{ stat.name }}</div>
+                                    <div class="text-xs text-gray-500 mt-1 max-w-md line-clamp-1 leading-relaxed">{{
+                                        stat.description }}</div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center">
+                                        <div class="h-2 w-2 rounded-full mr-2"
+                                            [class.bg-green-500]="stat.status === 'Open'"
+                                            [class.bg-red-500]="stat.status === 'Closed'"
+                                            [class.bg-amber-500]="stat.status === 'Under Maintenance'">
+                                        </div>
+                                        <span [class.text-green-700]="stat.status === 'Open'"
+                                            [class.text-red-700]="stat.status === 'Closed'"
+                                            [class.text-amber-700]="stat.status === 'Under Maintenance'"
+                                            class="text-xs font-black uppercase tracking-wider">
+                                            {{ stat.status }}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-right text-xs text-gray-400 font-medium tabular-nums">
+                                    {{ stat.updated_at ? (stat.updated_at | date:'mediumDate':'+0530') : 'Routine' }}
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            }
+            } @else {
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-16 text-center">
+                <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-gray-700 mb-2">No Amenity Data Found</h3>
+                <p class="text-sm text-gray-500 max-w-sm mx-auto">Amenity information will appear here once you have an
+                    active booking or rental in a property tower.</p>
+            </div>
+            }
+        </div>
+        }
+    </main>
+</div>
+
+<!-- Booking Approval Popup Modal -->
+@if (showApprovalPopup && approvedBookingForPopup) {
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <!-- Backdrop -->
+    <div class="fixed inset-0 bg-indigo-900/40 backdrop-blur-md transition-opacity" (click)="closeApprovalPopup()">
+    </div>
+
+    <!-- Modal Content -->
+    <div
+        class="relative bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-300 border border-white">
+        <!-- Header Image/Pattern -->
+        <div class="h-32 bg-gradient-to-br from-indigo-600 to-purple-700 relative flex items-center justify-center">
+            <div class="absolute inset-0 opacity-20 pointer-events-none">
+                <svg class="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white"></path>
+                </svg>
+            </div>
+            <div class="bg-white/20 p-4 rounded-full backdrop-blur-sm border border-white/30">
+                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+        </div>
+
+        <div class="p-8">
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-black text-gray-900 mb-2">Booking Approved!</h3>
+                <p class="text-gray-500 font-medium">Great news! The administrator has reviewed and approved your
+                    booking request.</p>
+            </div>
+
+            <div class="bg-indigo-50/50 rounded-2xl p-5 border border-indigo-100 mb-8">
+                <div class="flex items-center gap-4 mb-3">
+                    <div
+                        class="h-12 w-12 rounded-xl bg-white shadow-sm flex items-center justify-center border border-indigo-50">
+                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-black text-gray-900">Unit {{ approvedBookingForPopup.unit_number }} · {{
+                            approvedBookingForPopup.tower_name }}</p>
+                        <p class="text-xs text-indigo-600 font-bold uppercase tracking-wider">Floor {{
+                            approvedBookingForPopup.floor }} · {{ approvedBookingForPopup.bhk }} BHK</p>
+                    </div>
+                </div>
+                <div class="space-y-3 border-t border-indigo-100 pt-3">
+                    <div class="flex justify-between items-center text-xs font-bold text-gray-500 uppercase">
+                        <span>Monthly Rent</span>
+                        <span class="text-gray-900">₹{{ approvedBookingForPopup.price | number:'1.0-0' }}</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs font-bold text-gray-500 uppercase">
+                        <span>Security Deposit</span>
+                        <span class="text-gray-900">₹{{ (approvedBookingForPopup.security_deposit || 0) | number:'1.0-0'
+                            }}</span>
+                    </div>
+                    <div class="flex justify-between items-end pt-2 border-t border-indigo-50">
+                        <span class="text-xs font-black text-indigo-600 uppercase tracking-widest">Total Initial
+                            Payment</span>
+                        <span class="text-2xl font-black text-indigo-700">₹{{
+                            calculateTotalInitialPayment(approvedBookingForPopup) | number:'1.0-0' }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-3">
+                <button (click)="initiatePaymentFlow(approvedBookingForPopup.id); closeApprovalPopup()"
+                    class="w-full bg-indigo-600 text-white py-4 rounded-2xl text-sm font-black hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-100 flex items-center justify-center gap-2 group">
+                    Proceed to Payment
+                    <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+                <button (click)="closeApprovalPopup()"
+                    class="w-full bg-gray-50 text-gray-500 py-3 rounded-2xl text-sm font-bold hover:bg-gray-100 transition-all">
+                    View My Bookings
+                </button>
+            </div>
+
+            <p class="mt-6 text-center text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-relaxed">
+                Notice: You have 5 minutes to complete the initial payment <br> before this reservation expires.
+            </p>
+        </div>
+    </div>
+</div>
+}

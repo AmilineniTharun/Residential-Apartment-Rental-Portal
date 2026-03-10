@@ -1,0 +1,21 @@
+<nav class="bg-indigo-600 text-white shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center">
+        <a routerLink="/" class="text-xl font-bold tracking-tight">RentalPortal</a>
+        <div class="hidden md:block ml-10 flex items-baseline space-x-4">
+          <a routerLink="/flats" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Find Flats</a>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <!-- Would show logic based on logged in state in actual implementation -->
+        <a routerLink="/login" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Login</a>
+        <a routerLink="/register" class="bg-white text-indigo-600 px-4 py-2 rounded-md text-sm font-bold shadow hover:bg-gray-100">Register</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="min-h-screen bg-gray-50">
+  <router-outlet></router-outlet>
+</main>

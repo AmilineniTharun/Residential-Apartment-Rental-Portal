@@ -1,0 +1,85 @@
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Node.js
+node_modules/
+dist/
+build/
+.angular/
+.npm
+frontend/node_modules/
+frontend/dist/
+frontend/out-tsc/
+frontend/.angular/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+backend/venv/
+backend/__pycache__/
+.pytest_cache/
+backend/.pytest_cache/
+
+# Environment Variables
+.env
+.env.test
+backend/.env
+
+# Logs and Debug
+*.log
+*.txt
+backend/*.log
+backend/*.txt
+frontend/*.log
+frontend/*.txt
+frontend/build_error.log
+frontend/frontend_startup.log
+
+# Screenshots and Test Reports
+*.png
+*.jpg
+*.jpeg
+backend/*.png
+backend/*.jpg
+backend/static/uploads/*
+!backend/static/uploads/.gitkeep
+test-results/
+coverage/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Final Artifacts
+*.sqlite
+*.sqlite3
+*.db
+*.pdf
+test_lease.pdf

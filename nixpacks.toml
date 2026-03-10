@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["python310", "gcc"]
+
+[phases.install]
+cmds = ["pip install -r backend/requirements.txt"]
+
+[phases.build]
+cmds = []
+
+[start]
+cmd = "sh -c 'cd backend && gunicorn --config gunicorn_config.py app:app'"
