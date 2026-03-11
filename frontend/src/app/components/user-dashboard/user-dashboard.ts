@@ -328,6 +328,24 @@ export class UserDashboard implements OnInit, OnDestroy {
   requestReason: { [bookingId: number]: string } = {};
   isSubmittingRequest = false;
 
+  // Maintenance description modal
+  showDescriptionModal = false;
+  selectedDescription = '';
+
+  viewDescription(description: string): void {
+    this.selectedDescription = description;
+    this.showDescriptionModal = true;
+  }
+
+  closeDescriptionModal(): void {
+    this.showDescriptionModal = false;
+    setTimeout(() => {
+      if (!this.showDescriptionModal) {
+        this.selectedDescription = '';
+      }
+    }, 300);
+  }
+
   ngOnInit(): void {
     this.loadMyBookings();
     this.loadPayments();
