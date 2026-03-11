@@ -52,11 +52,8 @@ backend/.env
 
 # Logs and Debug
 *.log
-*.txt
 backend/*.log
-backend/*.txt
 frontend/*.log
-frontend/*.txt
 frontend/build_error.log
 frontend/frontend_startup.log
 
