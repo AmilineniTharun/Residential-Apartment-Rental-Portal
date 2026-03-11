@@ -59,8 +59,14 @@ frontend/frontend_startup.log
 
 # Screenshots and Test Reports
 *.png
+!frontend/src/assets/**/*.png
+!frontend/public/assets/**/*.png
 *.jpg
+!frontend/src/assets/**/*.jpg
+!frontend/public/assets/**/*.jpg
 *.jpeg
+!frontend/src/assets/**/*.jpeg
+!frontend/public/assets/**/*.jpeg
 backend/*.png
 backend/*.jpg
 backend/static/uploads/*
